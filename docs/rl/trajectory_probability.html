@@ -1,0 +1,155 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trajectory Probability &mdash; Saeed Damadi PhD  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Saeed Damadi PhD
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../finance/index.html">Finance</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Saeed Damadi PhD</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Trajectory Probability</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/rl/trajectory_probability.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="trajectory-probability">
+<span id="id1"></span><h1>Trajectory Probability<a class="headerlink" href="#trajectory-probability" title="Permalink to this heading"></a></h1>
+<p>In Markov Decision Processes (MDPs), the trajectory represents the sequence of states and actions as the agent interacts with the environment over time. We start with an initial state <span class="math notranslate nohighlight">\(s_0\)</span>, then the agent takes an action <span class="math notranslate nohighlight">\(a_0\)</span>, which causes the environment to transition to a new state <span class="math notranslate nohighlight">\(s_1\)</span>, and this process continues, resulting in a trajectory <span class="math notranslate nohighlight">\(\tau = (s_0, a_0, s_1, a_1, ..., s_T)\)</span>. It is of interest to determine the probability of a specific trajectory <span class="math notranslate nohighlight">\(\tau\)</span>, which can be factorized using the Markov property and policy definitions.</p>
+<p>We start with the full trajectory probability and apply the conditional probability formula:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+P(\tau)
+&amp; =
+p(s_{T}, a_{T-1},s_{T-1},\dots,a_{1},s_{1},a_{0},s_{0}) \\
+&amp; =
+p(s_{T} \bigl \vert a_{T-1},s_{T-1},\dots,a_{0},s_{0}) 
+p(a_{T-1},s_{T-1},\dots,a_{0},s_{0}) \\
+&amp;\stackrel{1}{=} 
+p(s_{T} \bigl \vert a_{T-1},s_{T-1})
+p(a_{T-1},s_{T-1},\dots,a_{0},s_{0}) \\
+&amp;=
+p(s_{T} \bigl \vert a_{T-1},s_{T-1}) \;
+p(a_{T-1} \bigl \vert s_{T-1},\dots,a_{0},s_{0}) 
+p(s_{T-1},\dots,a_{0},s_{0}) \\
+&amp;\stackrel{2}{=} 
+p(s_{T} \bigl \vert a_{T-1},s_{T-1}) \;
+p(a_{T-1} \bigl \vert s_{T-1}) \;
+p(s_{T-1},\dots,a_{0},s_{0}) \\
+&amp; \stackrel{3}{=} 
+p(s_{T} \bigl \vert a_{T-1},s_{T-1})
+\pi(a_{T-1} \bigl \vert s_{T-1}) \;
+p(s_{T-1},\dots,a_{0},s_{0}) \\
+&amp; =
+\prod_{t=1}^T \Bigl(
+p(s_{t} \bigl \vert a_{t-1},s_{t-1})
+\pi(a_{t-1} \bigl \vert s_{t-1})
+\Bigr)
+p(s_{0})\\
+&amp;=
+p(s_{0})
+\prod_{t=1}^T
+p(s_{t} \bigl \vert a_{t-1},s_{t-1})
+\pi(a_{t-1} \bigl \vert s_{t-1}).
+\end{aligned}
+\end{split}\]</div>
+<p>where in step 1 we used the Markov property of the environment (i.e., the next state depends only on the current state and action), in step 2 we assumed that the policy is memoryless (i.e., the probability of taking an action depends only on the current state), and in step 3 we replaced the action probability with the policy function <span class="math notranslate nohighlight">\(\pi(a_{T-1} \bigl \vert s_{T-1})\)</span>.</p>
+<p>Now, when we parameterize the policy with <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(P_\theta(\tau) = p(s_0)\prod_{t=1}^{T}p(s_t|a_{t-1},s_{t-1})\pi_\theta(a_{t-1}|s_{t-1})\)</span></p>
+<p>This makes explicit that:</p>
+<ol class="arabic simple">
+<li><p>Only the policy <span class="math notranslate nohighlight">\(\pi\)</span> is parameterized by <span class="math notranslate nohighlight">\(\theta\)</span> (becoming <span class="math notranslate nohighlight">\(\pi_\theta\)</span>)</p></li>
+<li><p>The environment dynamics <span class="math notranslate nohighlight">\(p(s_t|a_{t-1},s_{t-1})\)</span> are independent of <span class="math notranslate nohighlight">\(\theta\)</span></p></li>
+<li><p>The initial state distribution <span class="math notranslate nohighlight">\(p(s_0)\)</span> is independent of <span class="math notranslate nohighlight">\(\theta\)</span></p></li>
+<li><p>The overall trajectory distribution <span class="math notranslate nohighlight">\(P_\theta(\tau)\)</span> depends on <span class="math notranslate nohighlight">\(\theta\)</span> only through the policy</p></li>
+</ol>
+<p>This clarifies why we can write expectations as <span class="math notranslate nohighlight">\(\mathbb{E}_{\tau\sim p_\theta(\tau)}[\cdot]\)</span> when computing <a class="reference internal" href="policy_gradient_proof.html#policy-gradient"><span class="std std-ref">policy gradients</span></a>.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Saeed Damadi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
