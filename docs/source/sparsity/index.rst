@@ -5,5 +5,6 @@ Sparsity
 
 .. toctree::
    :maxdepth: 2
+   :hidden:
 
    unstructured_sparsity
