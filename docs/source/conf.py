@@ -10,6 +10,16 @@ author = 'Saeed Damadi'
 templates_path = ['_templates']
 exclude_patterns = []
 
+html_theme_options = {
+    'collapse_navigation': False,
+    'sticky_navigation': True,
+    'navigation_depth': 4,        # Adjust as needed for your document hierarchy
+    'includehidden': True,        # Make sure hidden toctrees are still displayed
+    'titles_only': False
+}
+
+
+
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',  # For viewing source code

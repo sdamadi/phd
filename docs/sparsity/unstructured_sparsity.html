@@ -1,0 +1,269 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unstructured Sparsity &mdash; Saeed Damadi PhD  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Sparsity" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Saeed Damadi PhD
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../iris/index.html">Iris</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../iris/model_uncertainty.html">Model Uncertainty</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rl/index.html">Reinforcement Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rl/log_derivative_trick.html">Log-derivative formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/trajectory_probability.html">Trajectory Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_gradient_proof.html">Policy Gradient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_grad_alg.html">Policy Gradient Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms/index.html">Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/iht.html">Iterative Hard Thresholding</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Sparsity</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Unstructured Sparsity</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Saeed Damadi PhD</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Sparsity</a></li>
+      <li class="breadcrumb-item active">Unstructured Sparsity</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/sparsity/unstructured_sparsity.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="unstructured-sparsity">
+<h1>Unstructured Sparsity<a class="headerlink" href="#unstructured-sparsity" title="Permalink to this heading"></a></h1>
+<p>The following experiment tries to show that using the Iterative Hard Thresholding (IHT) algorithm does not lead to a trained neural network that has structured sparsity. Structured sparsity means that we have columns or rows that are completely zero.</p>
+<p>To illustrate this, we use the Iris dataset, which contains 150 data points representing three different flower species. Each sample includes four numerical features: sepal length, sepal width, petal length, and petal width, as shown in the picture.</p>
+<figure style="text-align: center;">
+  <img src="../../_static/images/iris/iris_dataset.svg" alt="Iris dataset visualization" width="60%">
+  <figcaption>The three Iris species. Measurements are shown only for Iris Versicolor.</figcaption>
+</figure>
+<p>We exclude one sample from the dataset, which is:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x} = [6.4, 3.2, 4.5, 1.5]^T.
+\]</div>
+<p>This sample is belong to versicolor flowers, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+\text{The original sample class} = \text{2 (versicolor)}.
+\]</div>
+<p>Thus, we have 149 samples in total. If we split the data into 80% training and 20% testing (inference), we get approximately (120, 30).
+We consider a one-layer neural network architecture, as shown below. This network has four inputs and three outputs. Therefore, we train a single-layer network using almost 120 data points.</p>
+<figure style="text-align: center;">
+  <img src="../../_static/images/iris/single_layer_nn.svg" alt="Single-layer neural netowrk." width="30%">
+  <figcaption>A single-layer neural network with 4 inputs and 3 outputs.</figcaption>
+</figure>
+<p>We initialize the network by setting the sparsity level to 5, i.e., <span class="math notranslate nohighlight">\(s=5\)</span>. The initial weights are the following:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{W}_{\text{init}} =
+\begin{bmatrix}
+-0.99 &amp; 0 &amp; 0 &amp; 0.41 \\
+-0.73 &amp; -0.06 &amp; 0 &amp; 0 \\
+0 &amp; 0.62 &amp; 0 &amp; 0 \\
+\end{bmatrix}, \quad
+\mathbf{b}_{\text{init}} = 
+\begin{bmatrix}
+0 \\ 0 \\ 0
+\end{bmatrix}.
+\end{split}\]</div>
+<p>After training, the trained weights are as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{W}_{\text{final}} =
+\begin{bmatrix}
+-1.44 &amp; 0 &amp; -4.74 &amp; 0 \\
+0 &amp; -0.5 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 5.45 \\
+\end{bmatrix}, \quad
+\mathbf{b}_{\text{final}} =
+\begin{bmatrix}
+0 \\ 3.14 \\ 0
+\end{bmatrix}.
+\end{split}\]</div>
+<p>The network accuracy is 93.33% and it correctly classifies the sample that we kept at the beginning.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Mean vector: } \boldsymbol{\mu} = [5.79, 3.08, 3.62, 1.13]^T
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{Standard deviation vector: } \boldsymbol{\sigma} = [0.86, 0.45, 1.84, 0.79]^T
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{Normalized vector: } \mathbf{x_{norm}} = [0.71, 0.27, 0.48, 0.47]^T
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{z} = \mathbf{W}\mathbf{x_{norm}} + \mathbf{b}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{z} =
+\begin{bmatrix} 
+-1.44 &amp; 0 &amp; -4.74 &amp; 0 \\ 
+0 &amp; -0.5 &amp; 0 &amp; 0 \\ 
+0 &amp; 0 &amp; 0 &amp; 5.45 \\
+\end{bmatrix} 
+\begin{bmatrix} 0.71 \\ 0.27 \\ 0.48 \\ 0.47 \end{bmatrix} + \begin{bmatrix} 0 \\ 3.14 \\ 0 \end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{z} =
+\begin{bmatrix} -3.27 &amp; \\ 3.01 &amp; \leftarrow \max \\ 2.55 &amp; \end{bmatrix}
+\end{split}\]</div>
+<p>The predicted class is 2 which matches the true class!</p>
+<p>As you can see, neither a row nor a column is completely zero in the trained network, clearly verifying there is no pattern in the sparsity of the trained network.</p>
+<p>This is much more clear if we look at the weights and biases on the trained network. As the picture shows, there is at least a connection between an input and output neuron.</p>
+<figure style="text-align: center;">
+  <img src="../../_static/images/iris/unstructured.svg" alt="Unstructured Sparsity as a result of the ITH algorithm" width="30%">
+  <figcaption>The unstructured sparsity pattern after training the network using IHT algorithm.</figcaption>
+</figure>
+<p>On the other hand, if you look at the following trained network, it has 96.67% accuracy on the test set with two columns that are completely zero.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{W}_{\text{final}} =
+\begin{bmatrix}
+0 &amp; 0 &amp; -4.88 &amp; -3.62 \\
+0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 3.41 &amp; 4.91 \\
+\end{bmatrix}, \quad
+\mathbf{b}_{\text{final}} =
+\begin{bmatrix}
+0 \\ 5.34 \\ 0
+\end{bmatrix}.
+\end{split}\]</div>
+<p>The network achieves a test accuracy of 96.67% and correctly classifies our sample.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Mean vector: } \boldsymbol{\mu} = [5.78, 3.04, 3.7, 1.18]^T
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{Standard deviation vector: } \boldsymbol{\sigma} = [0.81, 0.42, 1.77, 0.78]^T
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{Normalized sample: } \mathbf{x_{norm}} = [0.77, 0.38, 0.46, 0.41]^T
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{z} = \mathbf{W}\mathbf{x_{norm}} + \mathbf{b}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{z} =
+\begin{bmatrix} 
+0 &amp; 0 &amp; -4.88 &amp; -3.62 \\ 
+0 &amp; 0 &amp; 0 &amp; 0 \\ 
+0 &amp; 0 &amp; 3.41 &amp; 4.91 \\
+\end{bmatrix} 
+\begin{bmatrix} 0.77 \\ 0.38 \\ 0.46 \\ 0.41 \end{bmatrix} + \begin{bmatrix} 0 \\ 5.34 \\ 0 \end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{z} =
+\begin{bmatrix} -3.72 &amp; \\ 5.34 &amp; \leftarrow \max \\ 3.59 &amp; \end{bmatrix}
+\end{split}\]</div>
+<p>The predicted class is 2, which matches the true class!</p>
+<p>These zero columns result in no connection to two input neurons as you can see this clealry in the picture.</p>
+<figure style="text-align: center;">
+  <img src="../../_static/images/iris/structured.svg" alt="Structured Sparsity as a result of the ITH algorithm" width="30%">
+  <figcaption>The structuredd sparsity pattern in a trained network that performs as well as the dense one.</figcaption>
+</figure>
+<p>This demonstrates that IHT may result in an unstructured sparsity patterns when some structured sparsity patterns exist.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Sparsity" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Saeed Damadi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

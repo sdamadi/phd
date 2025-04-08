@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Log-derivative formula &mdash; Saeed Damadi PhD  documentation</title>
+  <title>Iterative Hard Thresholding &mdash; Saeed Damadi PhD  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Trajectory Probability" href="trajectory_probability.html" />
-    <link rel="prev" title="Reinforcement Learning" href="index.html" /> 
+    <link rel="next" title="Sparsity" href="../sparsity/index.html" />
+    <link rel="prev" title="Algorithms" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,15 +49,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../iris/model_uncertainty.html">Model Uncertainty</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reinforcement Learning</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Log-derivative formula</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trajectory_probability.html">Trajectory Probability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="policy_gradient_proof.html">Policy Gradient</a></li>
-<li class="toctree-l2"><a class="reference internal" href="policy_grad_alg.html">Policy Gradient Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rl/index.html">Reinforcement Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rl/log_derivative_trick.html">Log-derivative formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/trajectory_probability.html">Trajectory Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_gradient_proof.html">Policy Gradient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_grad_alg.html">Policy Gradient Algorithm</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../algorithms/index.html">Algorithms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../algorithms/iht.html">Iterative Hard Thresholding</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Algorithms</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Iterative Hard Thresholding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../sparsity/index.html">Sparsity</a><ul>
@@ -80,10 +80,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">Reinforcement Learning</a></li>
-      <li class="breadcrumb-item active">Log-derivative formula</li>
+          <li class="breadcrumb-item"><a href="index.html">Algorithms</a></li>
+      <li class="breadcrumb-item active">Iterative Hard Thresholding</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/rl/log_derivative_trick.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/algorithms/iht.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -91,35 +91,34 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="log-derivative-formula">
-<span id="log-derivative"></span><h1>Log-derivative formula<a class="headerlink" href="#log-derivative-formula" title="Permalink to this heading"></a></h1>
-<p>The <span class="math notranslate nohighlight">\(\log\)</span>-derivative formula states that for a function composition involving logarithms:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="iterative-hard-thresholding">
+<h1>Iterative Hard Thresholding<a class="headerlink" href="#iterative-hard-thresholding" title="Permalink to this heading"></a></h1>
+<p>The Iterative Hard Thresholding (IHT) algorithm is the sparse analogue of the gradient descent algorithm. After performing the gradient update, it projects a dense vector into a sparse vector. Mathematically speaking, it projects a given vector into a lower dimensional subspace by retaining only the most significant components.</p>
+<p>Unlike standard gradient descent which updates all parameters, IHT enforces sparsity by keeping only the s largest (in magnitude) components after each gradient step, setting all other components to zero. This makes IHT particularly useful for problems where the solution is known to be sparse, such as compressed sensing, sparse regression, and sparse signal recovery.</p>
 <div class="math notranslate nohighlight">
-\[\frac{d}{dx}\log(f(x)) = \frac{1}{f(x)} \frac{df(x)}{dx}.\]</div>
-<p>If we have a function <span class="math notranslate nohighlight">\(f(\mathbf{x})\)</span> (<span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^n\)</span>) and we’re looking for the gradient of <span class="math notranslate nohighlight">\(\log(f(\mathbf{x}))\)</span>, we can apply the <span class="math notranslate nohighlight">\(\log\)</span>-derivative formula in the multivariable setting:</p>
+\[
+\textbf{Algorithm: Iterative Hard Thresholding (IHT)}
+\]</div>
+<p><span class="math notranslate nohighlight">\(\textbf{Input:}\)</span> Initial parameter vector <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^0 \in \mathbb{R}^n\)</span> satisfying <span class="math notranslate nohighlight">\(\|\boldsymbol{\theta}^0\|_0 \leq s\)</span>, sparsity level <span class="math notranslate nohighlight">\(s\)</span>, and stepsize <span class="math notranslate nohighlight">\(\gamma &gt; 0\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\text{For } k = 0, 1, 2, \dots \text{ do:}\)</span></p>
 <div class="math notranslate nohighlight">
-\[\nabla_{\mathbf{x}} \log(f(\mathbf{x})) = \frac{1}{f(\mathbf{x})} \nabla_{\mathbf{x}} f(\mathbf{x})\]</div>
-<p>This is the vector calculus equivalent of the scalar <span class="math notranslate nohighlight">\(\log\)</span>-derivative formula. The gradient <span class="math notranslate nohighlight">\(\nabla_{\mathbf{x}}\)</span> gives us a vector of partial derivatives with respect to each component of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
-<p>For each component <span class="math notranslate nohighlight">\(x_i\)</span> of the vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, we have:</p>
+\[
+\mathbf{v}^k = \boldsymbol{\theta}^k - \gamma \nabla f(\boldsymbol{\theta}^k)
+\]</div>
 <div class="math notranslate nohighlight">
-\[\frac{\partial}{\partial x_i} \log(f(\mathbf{x})) = \frac{1}{f(\mathbf{x})} \frac{\partial f(\mathbf{x})}{\partial x_i}\]</div>
-<p>So the full gradient is:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\nabla_{\mathbf{x}} \log(f(\mathbf{x})) = \frac{1}{f(\mathbf{x})} \begin{bmatrix} 
-\frac{\partial f(\mathbf{x})}{\partial x_1} \\
-\frac{\partial f(\mathbf{x})}{\partial x_2} \\
-\vdots \\
-\frac{\partial f(\mathbf{x})}{\partial x_n}
-\end{bmatrix}\end{split}\]</div>
-<p>This generalizes the scalar <span class="math notranslate nohighlight">\(\log\)</span>-derivative to the vector setting, maintaining the same core principle: the gradient of the logarithm of a function equals the gradient of the function divided by the function itself.</p>
+\[
+\boldsymbol{\theta}^{k+1} = H_s(\mathbf{v}^k),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(H_s\)</span> is the hard-thresholding operator which is a set-valued operator meaning its ouput is not unique. It sorts the input vector in absolute value and keeps only the <span class="math notranslate nohighlight">\(s\)</span> largest entries, setting all others to zero.
+For example, <span class="math notranslate nohighlight">\(H_2([1, -3, 1]^\top)=\{[1, -3, 0]^\top, [0, -3, 1]^\top\}\)</span>.</p>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Reinforcement Learning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="trajectory_probability.html" class="btn btn-neutral float-right" title="Trajectory Probability" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Algorithms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../sparsity/index.html" class="btn btn-neutral float-right" title="Sparsity" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

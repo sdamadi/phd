@@ -11,9 +11,12 @@ Second, I am passionate about advancing quantitative trading through sophisticat
 
 Feel free to reach out to me on `Linkedin <https://www.linkedin.com/in/saeed-damadi-54627889/>`_ and `X <https://x.com/saeeddamadi>`_.
 
+Navigation
+----------
 .. toctree::
    :maxdepth: 3
-   :hidden:
-
-   finance/index
+   
+   iris/index
    rl/index
+   algorithms/index
+   sparsity/index

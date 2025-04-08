@@ -20,7 +20,9 @@
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Policy Gradient Algorithm" href="policy_grad_alg.html" />
+    <link rel="prev" title="Trajectory Probability" href="trajectory_probability.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,8 +44,26 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../finance/index.html">Finance</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../iris/index.html">Iris</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../iris/model_uncertainty.html">Model Uncertainty</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reinforcement Learning</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="log_derivative_trick.html">Log-derivative formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trajectory_probability.html">Trajectory Probability</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Policy Gradient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="policy_grad_alg.html">Policy Gradient Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms/index.html">Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/iht.html">Iterative Hard Thresholding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sparsity/index.html">Sparsity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sparsity/unstructured_sparsity.html">Unstructured Sparsity</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -60,6 +80,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reinforcement Learning</a></li>
       <li class="breadcrumb-item active">Policy Gradient</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/rl/policy_gradient_proof.md.txt" rel="nofollow"> View page source</a>
@@ -95,7 +116,7 @@ J(\theta) &amp;= \mathbb{E}_{\tau \sim p_{\theta}} \left[ R(\tau) \right] \\
 \end{aligned} \end{split}\]</div>
 <p>Where:</p>
 <ul class="simple">
-<li><p>In step 1, we apply the identity <span class="math notranslate nohighlight">\(\nabla_\theta \log f(\theta) = \frac{\nabla_\theta f(\theta)}{f(\theta)}\)</span>
+<li><p>In step 1, we apply the identity <span class="math notranslate nohighlight">\(\nabla_\theta \log f(\theta) = \frac{\nabla_\theta f(\theta)}{f(\theta)}\)</span><br />
 (<a class="reference internal" href="log_derivative_trick.html#log-derivative"><span class="std std-ref"><span class="math notranslate nohighlight">\(\log\)</span>-derivative formula</span></a>),
 which gives us <span class="math notranslate nohighlight">\(\nabla_\theta P_{\theta}(\tau) = P_{\theta}(\tau) \nabla_\theta \log P_{\theta}(\tau)\)</span>.</p></li>
 <li><p>In step 2, we use the trajectory probability formula derived <a class="reference internal" href="trajectory_probability.html#trajectory-probability"><span class="std std-ref">here</span></a>.</p></li>
@@ -108,7 +129,10 @@ which gives us <span class="math notranslate nohighlight">\(\nabla_\theta P_{\th
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="trajectory_probability.html" class="btn btn-neutral float-left" title="Trajectory Probability" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="policy_grad_alg.html" class="btn btn-neutral float-right" title="Policy Gradient Algorithm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

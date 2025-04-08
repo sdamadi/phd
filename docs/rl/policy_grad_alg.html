@@ -21,6 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Algorithms" href="../algorithms/index.html" />
     <link rel="prev" title="Policy Gradient" href="policy_gradient_proof.html" /> 
 </head>
 
@@ -44,12 +45,23 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../finance/index.html">Finance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iris/index.html">Iris</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../iris/model_uncertainty.html">Model Uncertainty</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Reinforcement Learning</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="log_derivative_trick.html">Log-derivative formula</a></li>
 <li class="toctree-l2"><a class="reference internal" href="trajectory_probability.html">Trajectory Probability</a></li>
 <li class="toctree-l2"><a class="reference internal" href="policy_gradient_proof.html">Policy Gradient</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Policy Gradient Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms/index.html">Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/iht.html">Iterative Hard Thresholding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sparsity/index.html">Sparsity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sparsity/unstructured_sparsity.html">Unstructured Sparsity</a></li>
 </ul>
 </li>
 </ul>
@@ -81,7 +93,14 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="policy-gradient-algorithm">
 <h1>Policy Gradient Algorithm<a class="headerlink" href="#policy-gradient-algorithm" title="Permalink to this heading"></a></h1>
-<p>If you look at the vanilla policy gradient algorithm, you’ll see that the gradient is expressed as an expectation. It means we’d have to consider all possible trajectories and compute their returns—a task that’s computationally impossible.</p>
+<p>Some people think reinforcement learning reduces the need for compute (GPUs), but it doesn’t.</p>
+<p>If you look at the vanilla policy gradient algorithm, you’ll see that the gradient is expressed as an expectation. And for those who understand how expectations are computed, it becomes immediately clear that it’s intractable. If we were God and we <em>knew</em> the expectation exactly, then we’d already have the exact gradient.</p>
+<p>But what does that mean? It means we’d have to consider all possible trajectories and compute their returns—a task that’s computationally impossible, it is the first algorithm.</p>
+<p>So what do we do instead?</p>
+<p>We approximate the gradient. But how?</p>
+<p>Unlike supervised learning, where the training data is static and available, in reinforcement learning we must <em>generate</em> data—by interacting with the environment—to approximate the gradient.</p>
+<p>For a fixed policy parameter, we roll out multiple trajectories and use them to estimate the expectation in practice. This data generation phase—sampling trajectories—requires significant computation, especially when environments are complex or policies are large neural networks. The second algorithm shows how.</p>
+<p>That’s why GPUs are heavily used. And that’s also where the concept of mini-batches comes into play—to make this expensive sampling and gradient estimation tractable within our compute budget.</p>
 <div class="math notranslate nohighlight">
 \[
 \textbf{Algorithm: Policy Gradient (Accessing the Exact Gradient)}
@@ -101,8 +120,6 @@
 \theta^k = \theta^{k-1} + \gamma \cdot \nabla_\theta J(\theta^{k-1})
 \]</div>
 <p><span class="math notranslate nohighlight">\(\text{End For.}\)</span></p>
-<p>So what do we do instead? We approximate the gradient. However, unlike the supervised learning, where the training data is static and available, in reinforcement learning we must <em>generate</em> data—by interacting with the environment—to approximate the gradient.</p>
-<p>For a fixed policy parameter, we roll out multiple trajectories and use them to estimate the expectation in practice. This data generation phase—sampling trajectories—requires significant computation, especially when environments are complex or policies are large neural networks. The following algorithm shows how.</p>
 <div class="math notranslate nohighlight">
 \[
 \textbf{Algorithm: Policy Gradient (Approximating the Gradient)}
@@ -131,6 +148,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="policy_gradient_proof.html" class="btn btn-neutral float-left" title="Policy Gradient" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../algorithms/index.html" class="btn btn-neutral float-right" title="Algorithms" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

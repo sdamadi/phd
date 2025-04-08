@@ -29,7 +29,7 @@ $$ \begin{aligned}
 \end{aligned} $$
 
 Where:
-- In step 1, we apply the identity $\nabla_\theta \log f(\theta) = \frac{\nabla_\theta f(\theta)}{f(\theta)}$ 
+- In step 1, we apply the identity $\nabla_\theta \log f(\theta) = \frac{\nabla_\theta f(\theta)}{f(\theta)}$  
 ([$\log$-derivative formula](log_derivative_trick.md#log-derivative)),
  which gives us $\nabla_\theta P_{\theta}(\tau) = P_{\theta}(\tau) \nabla_\theta \log P_{\theta}(\tau)$.
 - In step 2, we use the trajectory probability formula derived [here](trajectory_probability.md#trajectory-probability).

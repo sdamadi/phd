@@ -1,7 +1,21 @@
 # Policy Gradient Algorithm
 
 
-If you look at the vanilla policy gradient algorithm, you’ll see that the gradient is expressed as an expectation. It means we’d have to consider all possible trajectories and compute their returns—a task that’s computationally impossible.
+Some people think reinforcement learning reduces the need for compute (GPUs), but it doesn’t.
+
+If you look at the vanilla policy gradient algorithm, you’ll see that the gradient is expressed as an expectation. And for those who understand how expectations are computed, it becomes immediately clear that it’s intractable. If we were God and we *knew* the expectation exactly, then we’d already have the exact gradient.
+
+But what does that mean? It means we’d have to consider all possible trajectories and compute their returns—a task that’s computationally impossible, it is the first algorithm.
+
+So what do we do instead?
+
+We approximate the gradient. But how?
+
+Unlike supervised learning, where the training data is static and available, in reinforcement learning we must *generate* data—by interacting with the environment—to approximate the gradient.
+
+For a fixed policy parameter, we roll out multiple trajectories and use them to estimate the expectation in practice. This data generation phase—sampling trajectories—requires significant computation, especially when environments are complex or policies are large neural networks. The second algorithm shows how.
+
+That’s why GPUs are heavily used. And that’s also where the concept of mini-batches comes into play—to make this expensive sampling and gradient estimation tractable within our compute budget.
 
 
 $$
@@ -27,11 +41,6 @@ $$
 $$ 
 
 $\text{End For.}$
-
-So what do we do instead? We approximate the gradient. However, unlike the supervised learning, where the training data is static and available, in reinforcement learning we must *generate* data—by interacting with the environment—to approximate the gradient.
-
-For a fixed policy parameter, we roll out multiple trajectories and use them to estimate the expectation in practice. This data generation phase—sampling trajectories—requires significant computation, especially when environments are complex or policies are large neural networks. The following algorithm shows how.
-
 
 $$
 \textbf{Algorithm: Policy Gradient (Approximating the Gradient)}
