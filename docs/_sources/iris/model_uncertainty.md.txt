@@ -25,7 +25,7 @@ Thus, we have 149 samples in total. If we split the data into 80% training and 2
 We consider a one-layer neural network architecture, as shown below. This network has four inputs and three outputs. Therefore, we train a single-layer network using 120 data points.
 
 <figure style="text-align: center;">
-  <img src="../../_static/images/iris/single_layer_nn.svg" alt="Single-layer neural netowrk." width="30%">
+  <img src="/phd/_static/images/iris/single_layer_nn.svg" alt="Single-layer neural netowrk." width="30%">
   <figcaption>A single-layer neural network with 4 inputs and 3 outputs.</figcaption>
 </figure>
 

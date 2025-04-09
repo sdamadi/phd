@@ -5,7 +5,7 @@ The following experiment tries to show that using the Iterative Hard Thresholdin
 To illustrate this, we use the Iris dataset, which contains 150 data points representing three different flower species. Each sample includes four numerical features: sepal length, sepal width, petal length, and petal width, as shown in the picture.
 
 <figure style="text-align: center;">
-  <img src="../../_static/images/iris/iris_dataset.svg" alt="Iris dataset visualization" width="60%">
+  <img src="/phd/_static/images/iris/iris_dataset.svg" alt="Iris dataset visualization" width="60%">
   <figcaption>The three Iris species. Measurements are shown only for Iris Versicolor.</figcaption>
 </figure>
 
@@ -25,7 +25,7 @@ Thus, we have 149 samples in total. If we split the data into 80% training and 2
 We consider a one-layer neural network architecture, as shown below. This network has four inputs and three outputs. Therefore, we train a single-layer network using almost 120 data points.
 
 <figure style="text-align: center;">
-  <img src="../../_static/images/iris/single_layer_nn.svg" alt="Single-layer neural netowrk." width="30%">
+  <img src="/phd/_static/images/iris/single_layer_nn.svg" alt="Single-layer neural netowrk." width="30%">
   <figcaption>A single-layer neural network with 4 inputs and 3 outputs.</figcaption>
 </figure>
 
@@ -104,7 +104,7 @@ As you can see, neither a row nor a column is completely zero in the trained net
 This is much more clear if we look at the weights and biases on the trained network. As the picture shows, there is at least a connection between an input and output neuron.
 
 <figure style="text-align: center;">
-  <img src="../../_static/images/iris/unstructured.svg" alt="Unstructured Sparsity as a result of the ITH algorithm" width="30%">
+  <img src="/phd/_static/images/iris/unstructured.svg" alt="Unstructured Sparsity as a result of the ITH algorithm" width="30%">
   <figcaption>The unstructured sparsity pattern after training the network using IHT algorithm.</figcaption>
 </figure>
 
@@ -162,7 +162,7 @@ The predicted class is 2, which matches the true class!
 These zero columns result in no connection to two input neurons as you can see this clealry in the picture.
 
 <figure style="text-align: center;">
-  <img src="../../_static/images/iris/structured.svg" alt="Structured Sparsity as a result of the ITH algorithm" width="30%">
+  <img src="/phd/_static/images/iris/structured.svg" alt="Structured Sparsity as a result of the ITH algorithm" width="30%">
   <figcaption>The structuredd sparsity pattern in a trained network that performs as well as the dense one.</figcaption>
 </figure>
 
