@@ -5,7 +5,7 @@ Understanding this variability is crucial for developing robust AI systems, as i
 To illustrate this, we use the Iris dataset, which contains 150 data points representing three different flower species. Each sample includes four numerical features: sepal length, sepal width, petal length, and petal width, as shown in the picture.
 
 <figure style="text-align: center;">
-  <img src="_static/images/iris/iris_dataset.svg" alt="Iris dataset visualization" width="60%">
+  <img src="../_static/images/iris/iris_dataset.svg" alt="Iris dataset visualization" width="60%">
   <figcaption>The three Iris species. Measurements are shown only for Iris Versicolor.</figcaption>
 </figure>
 
