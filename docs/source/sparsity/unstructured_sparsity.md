@@ -12,7 +12,7 @@ To illustrate this, we use the Iris dataset, which contains 150 data points repr
 We exclude one sample from the dataset, which is:
 
 $$
-\mathbf{x} = [6.4, 3.2, 4.5, 1.5]^T
+\mathbf{x} = [6.4, 3.2, 4.5, 1.5]^T.
 $$
 
 This sample is belong to versicolor flowers, i.e., 

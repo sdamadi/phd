@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARIMA &mdash; Saeed Damadi PhD  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Statistics" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Saeed Damadi PhD
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../iris/index.html">Iris</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../iris/model_uncertainty.html">Model Uncertainty</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rl/index.html">Reinforcement Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rl/log_derivative_trick.html">Log-derivative formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/trajectory_probability.html">Trajectory Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_gradient_proof.html">Policy Gradient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_grad_alg.html">Policy Gradient Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms/index.html">Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/iht.html">Iterative Hard Thresholding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sparsity/index.html">Sparsity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sparsity/unstructured_sparsity.html">Unstructured Sparsity</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Statistics</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ARIMA</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Saeed Damadi PhD</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Statistics</a></li>
+      <li class="breadcrumb-item active">ARIMA</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/statistics/arima.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="arima">
+<h1>ARIMA<a class="headerlink" href="#arima" title="Permalink to this heading"></a></h1>
+<p>ARIMA (AutoRegressive Integrated Moving Average) is a powerful statistical model that predicts future values based on patterns in historical data. It’s widely used in finance, sales forecasting, weather prediction, and economic analysis.</p>
+<p><strong>How ARIMA Works</strong></p>
+<p>ARIMA consists of three components, which we can understand through temperature forecasting:</p>
+<ol class="arabic simple">
+<li><p>AR (AutoRegressive): If today is hot, tomorrow is likely to be hot too. Temperature values tend to correlate with recent past values.</p></li>
+<li><p>I (Integrated): If we’re in a warming period (like summer), ARIMA removes this trend to focus on the day-to-day patterns.</p></li>
+<li><p>MA (Moving Average): If there was an unexpected temperature spike yesterday (perhaps due to unusual weather), this effect gets smoothed out over time.</p></li>
+</ol>
+<p><strong>Understanding Differencing</strong></p>
+<p>Differencing is a crucial step that makes non-stationary time series data stationary by removing trends and seasonal patterns. The “I” (Integrated) component in ARIMA refers to this process.</p>
+<ul class="simple">
+<li><p>First differencing (<span class="math notranslate nohighlight">\(d=1\)</span>) computes the difference between consecutive observations:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\Delta X_t = X_t - X_{t-1}\]</div>
+<ul class="simple">
+<li><p>Second differencing (<span class="math notranslate nohighlight">\(d=2\)</span>) applies differencing twice:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\Delta^2 X_t = \Delta(\Delta X_t) = (X_t - X_{t-1}) - (X_{t-1} - X_{t-2}) = X_t - 2X_{t-1} + X_{t-2}\]</div>
+<p>Higher order differencing follows the same pattern.</p>
+<p><strong>The Complete ARIMA Formula</strong></p>
+<p>For an ARIMA(p,d,q) model:</p>
+<ol class="arabic simple">
+<li><p>First, apply d-th order differencing to obtain <span class="math notranslate nohighlight">\(\Delta^d X_t\)</span></p></li>
+<li><p>Then apply the ARMA(p,q) model to the differenced series:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\Delta^d X_t - \alpha_1 \Delta^d X_{t-1} - \cdots - \alpha_p \Delta^d X_{t-p} = \varepsilon_t + \theta_1 \varepsilon_{t-1} + \cdots + \theta_q \varepsilon_{t-q}\]</div>
+<p>This can be rewritten as:</p>
+<div class="math notranslate nohighlight">
+\[\Delta^d X_t = \alpha_1 \Delta^d X_{t-1} + \cdots + \alpha_p \Delta^d X_{t-p} + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \cdots + \theta_q \varepsilon_{t-q}\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Delta^d X_t\)</span> is the d-times differenced series</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha_i\)</span> are the parameters of the autoregressive part</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta_j\)</span> are the parameters of the moving average part</p></li>
+<li><p><span class="math notranslate nohighlight">\(\varepsilon_t\)</span> are error terms (white noise)</p></li>
+</ul>
+<p><strong>Worked Example:</strong> ARIMA(2,1,3)</p>
+<p>Let’s say our temperature time series data begins with: <span class="math notranslate nohighlight">\(X_1 = 75, X_2 = 77, X_3 = 76, X_4 = 78, \dots\)</span>, where:</p>
+<ul class="simple">
+<li><p>2 = AR order (using 2 previous observations)</p></li>
+<li><p>1 = Differencing order (taking first differences)</p></li>
+<li><p>3 = MA order (using 3 previous errors)</p></li>
+</ul>
+<p>Step 1: Calculate First Differences
+First, we need to difference the data to make it stationary. The first difference is:
+<span class="math notranslate nohighlight">\(\Delta X_t = X_t - X_{t-1}\)</span></p>
+<p>For our temperature data:</p>
+<ul class="simple">
+<li><p>Day 1: 75°F</p></li>
+<li><p>Day 2: 77°F, <span class="math notranslate nohighlight">\(\Delta X_2 = 77 - 75 = +2\)</span></p></li>
+<li><p>Day 3: 76°F, <span class="math notranslate nohighlight">\(\Delta X_3 = 76 - 77 = -1\)</span></p></li>
+</ul>
+<p>Step 2: Apply the ARIMA Model
+For an ARIMA(2,1,3) model, the equation is:
+<span class="math notranslate nohighlight">\(\Delta X_t = \alpha_1 \Delta X_{t-1} + \alpha_2 \Delta X_{t-2} + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \theta_2 \varepsilon_{t-2} + \theta_3 \varepsilon_{t-3}\)</span></p>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\alpha_1 = 0.7, \alpha_2 = 0.2\)</span> (AR coefficients)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta_1 = 0.3, \theta_2 = 0.2, \theta_3 = 0.1\)</span> (MA coefficients)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\varepsilon_t\)</span> is the error term</p></li>
+</ul>
+<p>Step 3: Make Predictions
+To predict Day 4’s temperature:</p>
+<ol class="arabic simple">
+<li><p>Calculate the expected first difference:
+<span class="math notranslate nohighlight">\(\Delta X_4^{expected} = \alpha_1 \Delta X_3 + \alpha_2 \Delta X_2 + \theta_1 \varepsilon_3 + \theta_2 \varepsilon_2 + \theta_3 \varepsilon_1\)</span>
+<span class="math notranslate nohighlight">\(\Delta X_4^{expected} = 0.7 \times (-1) + 0.2 \times (+2) + 0.3 \times (-1.2) + 0.2 \times (0) + 0.1 \times (0)\)</span>
+<span class="math notranslate nohighlight">\(\Delta X_4^{expected} = -0.7 + 0.4 - 0.36 = -0.66\)</span></p></li>
+<li><p>Convert back to temperature:
+<span class="math notranslate nohighlight">\(X_4^{expected} = X_3 + \Delta X_4^{expected} = 76 + (-0.66) = 75.34\)</span></p></li>
+<li><p>Calculate error:
+<span class="math notranslate nohighlight">\(\varepsilon_4 = X_4^{actual} - X_4^{expected} = 78 - 75.34 = 2.66\)</span></p></li>
+</ol>
+<p>Complete Calculation Example for Day 5:</p>
+<ol class="arabic simple">
+<li><p>AR Component:
+<span class="math notranslate nohighlight">\(\alpha_1 \Delta X_4 + \alpha_2 \Delta X_3 = 0.7 \times (+2) + 0.2 \times (-1) = 1.4 - 0.2 = 1.2\)</span></p></li>
+<li><p>MA Component:
+<span class="math notranslate nohighlight">\(\theta_1 \varepsilon_4 + \theta_2 \varepsilon_3 + \theta_3 \varepsilon_2 = 0.3 \times (2.66) + 0.2 \times (-1.2) + 0.1 \times (0) = 0.798 - 0.24 = 0.558\)</span></p></li>
+<li><p>Expected first difference:
+<span class="math notranslate nohighlight">\(\Delta X_5^{expected} = 1.2 + 0.558 = 1.758\)</span></p></li>
+<li><p>Predicted temperature:
+<span class="math notranslate nohighlight">\(X_5^{expected} = X_4 + \Delta X_5^{expected} = 78 + 1.758 = 79.758\)</span></p></li>
+<li><p>Actual Error:
+<span class="math notranslate nohighlight">\(\varepsilon_5 = X_5^{actual} - X_5^{expected} = 77 - 79.758 = -2.758\)</span></p></li>
+</ol>
+<p><strong>Temperature Prediction Table</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Day</p></th>
+<th class="head"><p>Actual Temp</p></th>
+<th class="head"><p>Previous Temp</p></th>
+<th class="head"><p>Diff</p></th>
+<th class="head"><p>Expected Temp</p></th>
+<th class="head"><p>Error</p></th>
+<th class="head"><p>Previous Errors</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>75°F</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>77°F</p></td>
+<td><p>75°F</p></td>
+<td><p>+2</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>76°F</p></td>
+<td><p>77°F</p></td>
+<td><p>-1</p></td>
+<td><p>-</p></td>
+<td><p>-1.2</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>78°F</p></td>
+<td><p>76°F</p></td>
+<td><p>+2</p></td>
+<td><p>75.34°F</p></td>
+<td><p>2.66</p></td>
+<td><p>-1.2, 0, 0</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>77°F</p></td>
+<td><p>78°F</p></td>
+<td><p>-1</p></td>
+<td><p>79.76°F</p></td>
+<td><p>-2.76</p></td>
+<td><p>2.66, -1.2, 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>79°F</p></td>
+<td><p>77°F</p></td>
+<td><p>+2</p></td>
+<td><p>76.28°F</p></td>
+<td><p>2.72</p></td>
+<td><p>-2.76, 2.66, -1.2</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>78°F</p></td>
+<td><p>79°F</p></td>
+<td><p>-1</p></td>
+<td><p>80.39°F</p></td>
+<td><p>-2.39</p></td>
+<td><p>2.72, -2.76, 2.66</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>80°F</p></td>
+<td><p>78°F</p></td>
+<td><p>+2</p></td>
+<td><p>77.31°F</p></td>
+<td><p>2.69</p></td>
+<td><p>-2.39, 2.72, -2.76</p></td>
+</tr>
+</tbody>
+</table>
+<p>This example demonstrates how ARIMA incorporates past patterns, adjusts for trends, and accounts for errors to make increasingly accurate temperature predictions over time.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Statistics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Saeed Damadi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

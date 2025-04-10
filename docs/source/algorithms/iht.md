@@ -18,7 +18,7 @@ $$
 $$
 
 $$
-\boldsymbol{\theta}^{k+1} = H_s(\mathbf{v}^k),
+\boldsymbol{\theta}^{k+1} \in H_s(\mathbf{v}^k),
 $$
 
 where $H_s$ is the hard-thresholding operator which is a set-valued operator meaning its ouput is not unique. It sorts the input vector in absolute value and keeps only the $s$ largest entries, setting all others to zero. 

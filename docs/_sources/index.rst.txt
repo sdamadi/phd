@@ -20,3 +20,4 @@ Feel free to reach out to me on `Linkedin <https://www.linkedin.com/in/saeed-dam
    rl/index
    algorithms/index
    sparsity/index
+   statistics/index

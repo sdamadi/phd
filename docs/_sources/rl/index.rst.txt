@@ -5,8 +5,6 @@ Reinforcement Learning
 
 .. toctree::
    :maxdepth: 2
-   :hidden:
-
    
    log_derivative_trick
    trajectory_probability
