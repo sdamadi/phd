@@ -112,3 +112,16 @@ Complete Calculation Example for Day 5:
 | 8   | 80°F        | 78°F         | +2         | 77.31°F      | 2.69  | -2.39, 2.72, -2.76 |
 
 This example demonstrates how ARIMA incorporates past patterns, adjusts for trends, and accounts for errors to make increasingly accurate temperature predictions over time.
+
+**Limitations**
+
+ARIMA models, despite their popularity, have several notable limitations:
+1.	They require stationary data: ARIMA models assume that after differencing, the time series becomes stationary (constant mean, variance, and autocorrelation). This requirement can be difficult to achieve with many real-world datasets.
+2.	Linear relationships only: ARIMA models can only capture linear relationships in data, making them less effective for complex, non-linear patterns that are common in many real-world phenomena.
+3.	Sensitivity to parameter selection: The performance of an ARIMA model heavily depends on correctly identifying the appropriate p, d, and q parameters, which can be challenging even for experienced analysts.
+4.	Struggles with seasonal data: Standard ARIMA doesn't handle seasonality well (though SARIMA, a seasonal extension, addresses this).
+5.	Poor with long-term forecasting: ARIMA models tend to converge to the mean for long-term forecasts, making them less reliable for extended prediction horizons.
+6.	Limited contextual understanding: These models don't incorporate external variables that might significantly impact the time series (though ARIMAX models attempt to address this).
+7.	Computational intensity: Fitting ARIMA models to large datasets can be computationally expensive and time-consuming.
+8.	Outlier sensitivity: ARIMA models can be disproportionately influenced by outliers and anomalies in the data.
+These limitations have led to the development of more sophisticated approaches, including machine learning methods that can better handle complex, non-linear relationships in time series data.
