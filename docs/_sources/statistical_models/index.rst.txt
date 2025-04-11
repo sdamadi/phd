@@ -1,5 +1,5 @@
-Statistics
-==========
+Statistical Models
+===================
 
 :doc:`Home </index>`
 
