@@ -7,3 +7,5 @@ Statistical Models
    :maxdepth: 2
 
    arima
+   garch
+   

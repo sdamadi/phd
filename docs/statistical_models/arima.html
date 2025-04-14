@@ -21,6 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="GARCH" href="garch.html" />
     <link rel="prev" title="Statistical Models" href="index.html" /> 
 </head>
 
@@ -65,6 +66,7 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Statistical Models</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">ARIMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="garch.html">GARCH</a></li>
 </ul>
 </li>
 </ul>
@@ -94,7 +96,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="arima">
+  <p>(arima)</p>
+<section class="tex2jax_ignore mathjax_ignore" id="arima">
 <h1>ARIMA<a class="headerlink" href="#arima" title="Permalink to this heading"></a></h1>
 <p>ARIMA (AutoRegressive Integrated Moving Average) is a powerful statistical model that predicts future values based on patterns in historical data. It’s widely used in finance, sales forecasting, weather prediction, and economic analysis.</p>
 <p><strong>How ARIMA Works</strong></p>
@@ -265,6 +268,22 @@ To predict Day 4’s temperature:</p>
 </tbody>
 </table>
 <p>This example demonstrates how ARIMA incorporates past patterns, adjusts for trends, and accounts for errors to make increasingly accurate temperature predictions over time.</p>
+<p><strong>1-Day Ahead Forecast</strong></p>
+<p>To perform a 1-day ahead temperature forecast using our ARIMA(2,1,3) model, we follow these steps:</p>
+<ol class="arabic">
+<li><p>First, we identify our most recent data points: Day 8 temperature was 80°F and Day 7 was 78°F, giving us a first difference of <span class="math notranslate nohighlight">\(\Delta X_8 = +2\)</span>.</p></li>
+<li><p>Next, we apply the AR component using our coefficients (<span class="math notranslate nohighlight">\(\alpha_1 = 0.7\)</span>, <span class="math notranslate nohighlight">\(\alpha_2 = 0.2\)</span>) and the two most recent first differences:</p>
+<p><span class="math notranslate nohighlight">\(0.7(\Delta X_8) + 0.2(\Delta X_7) = 0.7(+2) + 0.2(-1) = 1.4 - 0.2 = 1.2\)</span></p>
+</li>
+<li><p>Then, we calculate the MA component using our coefficients (<span class="math notranslate nohighlight">\(\theta_1 = 0.3\)</span>, <span class="math notranslate nohighlight">\(\theta_2 = 0.2\)</span>, <span class="math notranslate nohighlight">\(\theta_3 = 0.1\)</span>) and the three most recent error terms:</p>
+<p><span class="math notranslate nohighlight">\(0.3(\varepsilon_8) + 0.2(\varepsilon_7) + 0.1(\varepsilon_6) = 0.3(2.69) + 0.2(-2.39) + 0.1(2.72) = 0.601\)</span></p>
+</li>
+<li><p>We combine these components to get our expected first difference:
+<span class="math notranslate nohighlight">\(\Delta X_9^{expected} = \text{AR component} + \text{MA component} = 1.2 + 0.601 = 1.801\)</span></p></li>
+<li><p>Finally, we add this expected difference to our most recent temperature to get our forecast:
+<span class="math notranslate nohighlight">\(X_9^{expected} = X_8 + \Delta X_9^{expected} = 80°F + 1.8 = 81.8°F\)</span></p></li>
+</ol>
+<p>Therefore, our 1-day ahead forecast predicts a temperature of approximately 81.8°F for Day 9.</p>
 <p><strong>Limitations</strong></p>
 <p>ARIMA models, despite their popularity, have several notable limitations:</p>
 <ol class="arabic simple">
@@ -285,6 +304,7 @@ These limitations have led to the development of more sophisticated approaches, 
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="Statistical Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="garch.html" class="btn btn-neutral float-right" title="GARCH" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

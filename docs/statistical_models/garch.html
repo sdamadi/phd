@@ -1,0 +1,498 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GARCH &mdash; Saeed Damadi PhD  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="ARIMA" href="arima.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Saeed Damadi PhD
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../iris/index.html">Iris</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../iris/model_uncertainty.html">Model Uncertainty</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rl/index.html">Reinforcement Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rl/log_derivative_trick.html">Log-derivative formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/trajectory_probability.html">Trajectory Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_gradient_proof.html">Policy Gradient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_grad_alg.html">Policy Gradient Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms/index.html">Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/iht.html">Iterative Hard Thresholding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sparsity/index.html">Sparsity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sparsity/unstructured_sparsity.html">Unstructured Sparsity</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Statistical Models</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="arima.html">ARIMA</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">GARCH</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Saeed Damadi PhD</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Statistical Models</a></li>
+      <li class="breadcrumb-item active">GARCH</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/statistical_models/garch.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="garch">
+<h1>GARCH<a class="headerlink" href="#garch" title="Permalink to this heading"></a></h1>
+<p>GARCH (Generalized AutoRegressive Conditional Heteroskedasticity) is a powerful statistical model that predicts volatility in time series data based on past patterns. It’s widely used in finance, weather forecasting, energy markets, and economic analysis where the variability of data changes over time.</p>
+<p><strong>How GARCH Works</strong></p>
+<p>GARCH models the variance (volatility) of a time series, which we can understand through temperature forecasting:</p>
+<ol class="arabic simple">
+<li><p>ARCH component: If yesterday’s temperature deviated greatly from the average (a large error), today’s temperature is likely to be more unpredictable too. The variance depends on past squared errors.</p></li>
+<li><p>GARCH component: If temperature has been highly variable over the past week, it’s likely to remain variable. The variance depends on past variances.</p></li>
+</ol>
+<p><strong>Understanding the Model Specification</strong></p>
+<p>To model temperature variability using a GARCH process, we define:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\varepsilon_t\)</span> as the error in our temperature prediction (actual - predicted)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma_t\)</span> as the time-dependent standard deviation (volatility) of temperature</p></li>
+<li><p><span class="math notranslate nohighlight">\(z_t\)</span> as a random noise component</p></li>
+</ul>
+<p>The relationship is:</p>
+<div class="math notranslate nohighlight">
+\[
+\varepsilon_t = \sigma_t z_t
+\]</div>
+<p>For a GARCH(p,q) model, the variance equation is:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_t^2 = \omega + \sum_{i=1}^{q} \alpha_i \varepsilon_{t-i}^2 + \sum_{i=1}^{p} \beta_i \sigma_{t-i}^2
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\omega &gt; 0\)</span> is a constant term</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha_i \geq 0\)</span> are parameters for past squared errors</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_i \geq 0\)</span> are parameters for past variances</p></li>
+<li><p><span class="math notranslate nohighlight">\(p\)</span> is the number of past variance terms used</p></li>
+<li><p><span class="math notranslate nohighlight">\(q\)</span> is the number of past squared error terms used</p></li>
+</ul>
+<p><strong>Estimating the Initial Variance</strong></p>
+<p>To start a GARCH model, we need an initial variance value (<span class="math notranslate nohighlight">\(\sigma_1^2\)</span> or whichever period we begin modeling). Common approaches include:</p>
+<ol class="arabic">
+<li><p>Using the unconditional variance of the series, calculated as:</p>
+<div class="math notranslate nohighlight">
+\[
+   \sigma_{unconditional}^2 = \frac{\omega}{1 - \sum_{i=1}^{q}\alpha_i - \sum_{i=1}^{p}\beta_i}
+   \]</div>
+</li>
+<li><p>Using the sample variance from a training period (e.g., the variance of errors from a preliminary model)</p></li>
+<li><p>Using a simple moving average of available squared errors:</p>
+<div class="math notranslate nohighlight">
+\[
+   \sigma_{initial}^2 = \frac{1}{n}\sum_{i=1}^{n}\varepsilon_i^2
+   \]</div>
+</li>
+<li><p>Setting it to a reasonable value based on domain knowledge about the expected variability</p></li>
+</ol>
+<p>For our temperature example, we’ll use method 4 and start with <span class="math notranslate nohighlight">\(\sigma_3^2 = 4\)</span> (standard deviation of 2°F) based on typical daily temperature variability.</p>
+<p><strong>Worked Example: GARCH(1,1)</strong></p>
+<p>Let’s apply a GARCH(1,1) model to daily temperature forecasting using the same temperature series and predicted values from our ARIMA example:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_t^2 = \omega + \alpha_1 \varepsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\omega = 0.2\)</span> (baseline temperature variability)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha_1 = 0.3\)</span> (impact of yesterday’s prediction error)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_1 = 0.6\)</span> (persistence of previous day’s volatility)</p></li>
+</ul>
+<p>Step 1: Start with initial values from the (<a class="reference internal" href="arima.html#arima"><span class="std std-ref">ARIMA example</span></a>) , we have:</p>
+<ul class="simple">
+<li><p>Actual temperatures: <span class="math notranslate nohighlight">\(X = [75, 77, 76, 78, 77, 79, 78, 80]\)</span></p></li>
+<li><p>Predicted temperatures from ARIMA model: <span class="math notranslate nohighlight">\(X^{expected} = [-, -, 77.2, 75.3, 79.8, 76.3, 80.4, 77.3]\)</span></p></li>
+<li><p>Initial variance estimate <span class="math notranslate nohighlight">\(\sigma_3^2 = 4\)</span> (a standard deviation of <span class="math notranslate nohighlight">\(2°F\)</span>)</p></li>
+</ul>
+<p>Step 2: Calculate the error terms using the ARIMA predictions</p>
+<ul class="simple">
+<li><p>Day 3: Actual = <span class="math notranslate nohighlight">\(76°F\)</span>, Predicted = <span class="math notranslate nohighlight">\(77.2°F\)</span>, <span class="math notranslate nohighlight">\(\varepsilon_3 = 76 - 77.2 = -1.2°F\)</span></p></li>
+<li><p>Day 4: Actual = <span class="math notranslate nohighlight">\(78°F\)</span>, Predicted = <span class="math notranslate nohighlight">\(75.34°F\)</span>, <span class="math notranslate nohighlight">\(\varepsilon_4 = 78 - 75.34 = 2.66°F\)</span></p></li>
+<li><p>Day 5: Actual = <span class="math notranslate nohighlight">\(77°F\)</span>, Predicted = <span class="math notranslate nohighlight">\(79.76°F\)</span>, <span class="math notranslate nohighlight">\(\varepsilon_5 = 77 - 79.76 = -2.76°F\)</span></p></li>
+<li><p>Day 6: Actual = <span class="math notranslate nohighlight">\(79°F\)</span>, Predicted = <span class="math notranslate nohighlight">\(76.28°F\)</span>, <span class="math notranslate nohighlight">\(\varepsilon_6 = 79 - 76.28 = 2.72°F\)</span></p></li>
+<li><p>Day 7: Actual = <span class="math notranslate nohighlight">\(78°F\)</span>, Predicted = <span class="math notranslate nohighlight">\(80.39°F\)</span>, <span class="math notranslate nohighlight">\(\varepsilon_7 = 78 - 80.39 = -2.39°F\)</span></p></li>
+<li><p>Day 8: Actual = <span class="math notranslate nohighlight">\(80°F\)</span>, Predicted = <span class="math notranslate nohighlight">\(77.31°F\)</span>, <span class="math notranslate nohighlight">\(\varepsilon_8 = 80 - 77.31 = 2.69°F\)</span></p></li>
+</ul>
+<p>Step 3: Calculate the conditional variance for Day 4</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_4^2 = \omega + \alpha_1\varepsilon_3^2 + \beta_1\sigma_3^2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_4^2 = 0.2 + 0.3 \times (-1.2)^2 + 0.6 \times 4
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_4^2 = 0.2 + 0.3 \times 1.44 + 0.6 \times 4
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_4^2 = 0.2 + 0.432 + 2.4
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_4^2 = 3.032
+\]</div>
+<p>This means we expect a standard deviation of <span class="math notranslate nohighlight">\(\sqrt{3.032} = 1.74°F\)</span> in our Day 4 temperature prediction.</p>
+<p>Step 4: Calculate the conditional variance for Day 5</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_5^2 = \omega + \alpha_1\varepsilon_4^2 + \beta_1\sigma_4^2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_5^2 = 0.2 + 0.3 \times (2.66)^2 + 0.6 \times 3.032
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_5^2 = 0.2 + 0.3 \times 7.08 + 0.6 \times 3.032
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_5^2 = 0.2 + 2.124 + 1.819
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_5^2 = 4.143
+\]</div>
+<p>Step 5: Calculate the conditional variance for Day 6</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_6^2 = \omega + \alpha_1\varepsilon_5^2 + \beta_1\sigma_5^2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_6^2 = 0.2 + 0.3 \times (-2.76)^2 + 0.6 \times 4.143
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_6^2 = 0.2 + 0.3 \times 7.62 + 0.6 \times 4.143
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_6^2 = 0.2 + 2.286 + 2.486
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_6^2 = 4.972
+\]</div>
+<p>Step 6: Continue calculating for Days 7 and 8</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_7^2 = 0.2 + 0.3 \times (2.72)^2 + 0.6 \times 4.972
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_7^2 = 0.2 + 0.3 \times 7.40 + 0.6 \times 4.972
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_7^2 = 0.2 + 2.22 + 2.983
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_7^2 = 5.403
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_8^2 = 0.2 + 0.3 \times (-2.39)^2 + 0.6 \times 5.403
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_8^2 = 0.2 + 0.3 \times 5.71 + 0.6 \times 5.403
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_8^2 = 0.2 + 1.713 + 3.242
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_8^2 = 5.155
+\]</div>
+<p><strong>Temperature Volatility Prediction Table</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Day</p></th>
+<th class="head"><p>Actual Temp</p></th>
+<th class="head"><p>Previous Temp</p></th>
+<th class="head"><p>Diff</p></th>
+<th class="head"><p>Expected Temp</p></th>
+<th class="head"><p>Error</p></th>
+<th class="head"><p>Previous Errors</p></th>
+<th class="head"><p>Squared Error</p></th>
+<th class="head"><p>Predicted Variance</p></th>
+<th class="head"><p>Volatility</p></th>
+<th class="head"><p>95% Confidence Interval</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>75°F</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>77°F</p></td>
+<td><p>75°F</p></td>
+<td><p>+2</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>76°F</p></td>
+<td><p>77°F</p></td>
+<td><p>-1</p></td>
+<td><p>77.2°F</p></td>
+<td><p>-1.2</p></td>
+<td><p>-</p></td>
+<td><p>1.44</p></td>
+<td><p>4.000 (initial)</p></td>
+<td><p>2.000°F</p></td>
+<td><p>[73.2°F, 81.2°F]</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>78°F</p></td>
+<td><p>76°F</p></td>
+<td><p>+2</p></td>
+<td><p>75.34°F</p></td>
+<td><p>2.66</p></td>
+<td><p>-1.2</p></td>
+<td><p>7.08</p></td>
+<td><p>3.032</p></td>
+<td><p>1.741°F</p></td>
+<td><p>[71.9°F, 78.8°F]</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>77°F</p></td>
+<td><p>78°F</p></td>
+<td><p>-1</p></td>
+<td><p>79.76°F</p></td>
+<td><p>-2.76</p></td>
+<td><p>2.66, -1.2</p></td>
+<td><p>7.62</p></td>
+<td><p>4.143</p></td>
+<td><p>2.035°F</p></td>
+<td><p>[75.8°F, 83.7°F]</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>79°F</p></td>
+<td><p>77°F</p></td>
+<td><p>+2</p></td>
+<td><p>76.28°F</p></td>
+<td><p>2.72</p></td>
+<td><p>-2.76, 2.66</p></td>
+<td><p>7.40</p></td>
+<td><p>4.972</p></td>
+<td><p>2.230°F</p></td>
+<td><p>[71.9°F, 80.6°F]</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>78°F</p></td>
+<td><p>79°F</p></td>
+<td><p>-1</p></td>
+<td><p>80.39°F</p></td>
+<td><p>-2.39</p></td>
+<td><p>2.72, -2.76</p></td>
+<td><p>5.71</p></td>
+<td><p>5.403</p></td>
+<td><p>2.325°F</p></td>
+<td><p>[75.8°F, 85.0°F]</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>80°F</p></td>
+<td><p>78°F</p></td>
+<td><p>+2</p></td>
+<td><p>77.31°F</p></td>
+<td><p>2.69</p></td>
+<td><p>-2.39, 2.72</p></td>
+<td><p>7.24</p></td>
+<td><p>5.155</p></td>
+<td><p>2.270°F</p></td>
+<td><p>[72.9°F, 81.8°F]</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>1-Day Ahead Forecast</strong></p>
+<p>To create a forecast for the day ahead (Day 9), we need to:</p>
+<ol class="arabic simple">
+<li><p>Calculate the predicted variance (volatility) for Day 9 using the GARCH(1,1) model</p></li>
+<li><p>Combine this with an ARIMA forecast for the temperature on Day 9</p></li>
+</ol>
+<p>Step 1: Calculate Day 9’s Predicted Variance Using the GARCH(1,1) equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_9^2 = \omega + \alpha_1 \varepsilon_{8}^2 + \beta_1 \sigma_{8}^2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_9^2 = 0.2 + 0.3 \times (2.69)^2 + 0.6 \times 5.155
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_9^2 = 0.2 + 0.3 \times 7.24 + 0.6 \times 5.155
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_9^2 = 0.2 + 2.172 + 3.093
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_9^2 = 5.465
+\]</div>
+<p>This gives us a volatility (standard deviation) of: <span class="math notranslate nohighlight">\(\sigma_9 = \sqrt{5.465} = 2.338°F\)</span></p>
+<p>Step 2: Use the ARIMA 1-day ahead forecast from our previous example</p>
+<p>From our ARIMA(2,1,3) model, we predicted a temperature of <span class="math notranslate nohighlight">\(81.8°F\)</span> for Day 9.</p>
+<p>Step 3: Provide a Complete Forecast with Confidence Interval</p>
+<p>The complete forecast for Day 9 would be:</p>
+<ul class="simple">
+<li><p>Expected temperature: <span class="math notranslate nohighlight">\(81.8°F\)</span></p></li>
+<li><p>Volatility (standard deviation): <span class="math notranslate nohighlight">\(2.338°F\)</span></p></li>
+<li><p>95% confidence interval: <span class="math notranslate nohighlight">\(81.8°F \pm 1.96 \times 2.338°F = 81.8°F \pm 4.58°F = [77.22°F, 86.38°F]\)</span></p></li>
+</ul>
+<p>This means we can be 95% confident that the actual temperature on Day 9 will fall between approximately <span class="math notranslate nohighlight">\(77°F\)</span> and <span class="math notranslate nohighlight">\(86°F\)</span>.</p>
+<p><strong>Practical Interpretation</strong></p>
+<ol class="arabic simple">
+<li><p>Weather Forecasting Application:</p>
+<ul class="simple">
+<li><p>Days with higher <span class="math notranslate nohighlight">\(\sigma_t\)</span> values indicate times when temperature is harder to predict</p></li>
+<li><p>Weather forecasters could communicate larger confidence intervals to the public</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma_t = 2.0°F\)</span> might be reported as “High today of <span class="math notranslate nohighlight">\(76°F\)</span>, plus or minus <span class="math notranslate nohighlight">\(4°F\)</span>”</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma_t = 2.3°F\)</span> might be reported as “High today of <span class="math notranslate nohighlight">\(78°F\)</span>, plus or minus <span class="math notranslate nohighlight">\(4.6°F\)</span>”</p></li>
+</ul>
+</li>
+<li><p>Pattern Recognition:</p>
+<ul class="simple">
+<li><p>The model captures how prediction uncertainty evolves over time</p></li>
+<li><p>Errors tend to cluster (volatile periods tend to be followed by more volatile periods)</p></li>
+<li><p>Once volatility increases, it takes time to decrease (persistence effect)</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Testing for GARCH Effects in Temperature Data</strong></p>
+<p>To determine if temperature data exhibits GARCH effects, we would:</p>
+<ol class="arabic simple">
+<li><p>Create a temperature prediction model (like ARIMA)</p></li>
+<li><p>Collect the errors (<span class="math notranslate nohighlight">\(\varepsilon_t\)</span>) from this model</p></li>
+<li><p>Square the errors (<span class="math notranslate nohighlight">\(\varepsilon_t^2\)</span>)</p></li>
+<li><p>Test if these squared errors are autocorrelated (related to their own past values)</p></li>
+</ol>
+<p>If significant autocorrelation exists in the squared errors, GARCH modeling would be appropriate.</p>
+<p><strong>Limitations</strong></p>
+<p>GARCH models for temperature forecasting have several limitations:</p>
+<ol class="arabic simple">
+<li><p>They assume symmetry in how positive and negative temperature shocks affect future volatility</p></li>
+<li><p>They work best for high-frequency data (daily temperatures rather than monthly averages)</p></li>
+<li><p>They may not adequately capture seasonal patterns in temperature volatility</p></li>
+<li><p>Extreme weather events (outliers) can disproportionately impact the model</p></li>
+<li><p>They require sufficient historical data to estimate parameters accurately</p></li>
+<li><p>The assumption that volatility is completely predetermined by past values is a simplification</p></li>
+</ol>
+<p>Despite these limitations, GARCH models provide valuable information about the changing uncertainty in temperature predictions, helping meteorologists communicate more accurate confidence intervals.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="arima.html" class="btn btn-neutral float-left" title="ARIMA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Saeed Damadi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

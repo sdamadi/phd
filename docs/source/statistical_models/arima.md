@@ -1,3 +1,4 @@
+(arima)
 # ARIMA
 
 ARIMA (AutoRegressive Integrated Moving Average) is a powerful statistical model that predicts future values based on patterns in historical data. It's widely used in finance, sales forecasting, weather prediction, and economic analysis.
@@ -112,6 +113,28 @@ Complete Calculation Example for Day 5:
 | 8   | 80°F        | 78°F         | +2         | 77.31°F      | 2.69  | -2.39, 2.72, -2.76 |
 
 This example demonstrates how ARIMA incorporates past patterns, adjusts for trends, and accounts for errors to make increasingly accurate temperature predictions over time.
+
+**1-Day Ahead Forecast**
+
+To perform a 1-day ahead temperature forecast using our ARIMA(2,1,3) model, we follow these steps:
+
+1) First, we identify our most recent data points: Day 8 temperature was 80°F and Day 7 was 78°F, giving us a first difference of $\Delta X_8 = +2$.
+
+2) Next, we apply the AR component using our coefficients ($\alpha_1 = 0.7$, $\alpha_2 = 0.2$) and the two most recent first differences:
+
+   $0.7(\Delta X_8) + 0.2(\Delta X_7) = 0.7(+2) + 0.2(-1) = 1.4 - 0.2 = 1.2$
+
+3) Then, we calculate the MA component using our coefficients ($\theta_1 = 0.3$, $\theta_2 = 0.2$, $\theta_3 = 0.1$) and the three most recent error terms:
+
+   $0.3(\varepsilon_8) + 0.2(\varepsilon_7) + 0.1(\varepsilon_6) = 0.3(2.69) + 0.2(-2.39) + 0.1(2.72) = 0.601$
+
+4) We combine these components to get our expected first difference:
+   $\Delta X_9^{expected} = \text{AR component} + \text{MA component} = 1.2 + 0.601 = 1.801$
+
+5) Finally, we add this expected difference to our most recent temperature to get our forecast:
+   $X_9^{expected} = X_8 + \Delta X_9^{expected} = 80°F + 1.8 = 81.8°F$
+
+Therefore, our 1-day ahead forecast predicts a temperature of approximately 81.8°F for Day 9.
 
 **Limitations**
 
