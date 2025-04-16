@@ -30,3 +30,4 @@ Feel free to reach out to me on `LinkedIn <https://www.linkedin.com/in/saeed-dam
    algorithms/index
    sparsity/index
    statistical_models/index
+   one_layer/index

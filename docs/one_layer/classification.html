@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>One-layer neural network &mdash; Saeed Damadi PhD  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="One-layer neural networks" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Saeed Damadi PhD
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../iris/index.html">Iris</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../iris/model_uncertainty.html">Model Uncertainty</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rl/index.html">Reinforcement Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rl/log_derivative_trick.html">Log-derivative formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/trajectory_probability.html">Trajectory Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_gradient_proof.html">Policy Gradient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_grad_alg.html">Policy Gradient Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms/index.html">Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/iht.html">Iterative Hard Thresholding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sparsity/index.html">Sparsity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sparsity/unstructured_sparsity.html">Unstructured Sparsity</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../statistical_models/index.html">Statistical Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../statistical_models/arima.html">ARIMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statistical_models/garch.html">GARCH</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">One-layer neural networks</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">One-layer neural network</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Saeed Damadi PhD</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">One-layer neural networks</a></li>
+      <li class="breadcrumb-item active">One-layer neural network</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/one_layer/classification.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="one-layer-neural-network">
+<h1>One-layer neural network<a class="headerlink" href="#one-layer-neural-network" title="Permalink to this heading"></a></h1>
+<p>A one-layer neural network architecture provides a lot of insights about fundamental understanding concepts like parameters, training, the role of loss function, backpropagation, and so on. Consider a one-layer neural network that has 4 inputs and 3 outputs as follows.</p>
+<figure style="text-align: center;">
+  <img src="../../_static/images/iris/one_layer/sing_layer_arch_wx.svg" alt="A one-layer neural network architecture" width="40%">
+  <figcaption>A one-layer neural network architecture.</figcaption>
+</figure>
+<p><strong>Parameters</strong></p>
+<p>The size of the input and output determines the parameter set of this neural network. Since it has only a single linear layer, the output can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{z} = \mathbf{W}\mathbf{x} + \mathbf{b},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> are weight matrix and bias vector of the network with sizes that are determined by the input and output size. Thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{W}=
+\begin{bmatrix}
+w_{11} &amp; w_{12} &amp; w_{13} &amp; w_{14} \\
+w_{21} &amp; w_{22} &amp; w_{23} &amp; w_{24} \\
+w_{31} &amp; w_{32} &amp; w_{33} &amp; w_{34} \\
+\end{bmatrix}
+,
+\mathbf{b}=
+\begin{bmatrix}
+b_{1} \\ b_{2} \\ b_{3}
+\end{bmatrix}.
+\end{split}\]</div>
+<p>The vector <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> is called logit.</p>
+<p><strong>Loss function</strong></p>
+<p>The above is only how we define the architecture of the network. Therefore, it is not considered as a neural network model. To convert any neural network architecture, we need to have a loss function that has to be a scalar-valued function. Notice, that right now the architecture returns a vector in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>.</p>
+<p>Suppose the loss function is the cross-entropy function. This function measures how close two probability vectors are to one another. However, the problem is that logit vector is not a probability vector and we need to convert it to a probability vector. Transforming the logit vector to a probability vector is done by a softmax function (vector-valued) that simply raises each component to <span class="math notranslate nohighlight">\(e\)</span> and divides by the sum of them as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{\mathbf{y}}
+=
+\text{softmax}(\mathbf{z})
+=
+\begin{bmatrix}
+\frac{e^{z_1}}{e^{z_1}+e^{z_2}+e^{z_3}}
+\\
+\frac{e^{z_2}}{e^{z_1}+e^{z_2}+e^{z_3}}
+\\
+\frac{e^{z_3}}{e^{z_1}+e^{z_2}+e^{z_3}}
+\end{bmatrix}.
+\end{split}\]</div>
+<p>The vector <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span> is now the output of the single layer neural network as the picture shows.</p>
+<figure style="text-align: center;">
+  <img src="../../_static/images/iris/one_layer/sing_layer_model_wx.svg" alt="A one-layer neural network model" width="40%">
+  <figcaption>A one-layer neural network model.</figcaption>
+</figure>
+<p>Note that transformations that convert logit vectors of layers of a neural network are called activation functions. Thus, the above softmax function is an activation function.</p>
+<p>Finally, we can write</p>
+<div class="math notranslate nohighlight">
+\[
+l
+(
+\mathbf{y}, \hat{\mathbf{y}}
+)
+=
+\text{CE}
+\Big(
+\text{softmax}(
+\mathbf{W}\mathbf{x}+\mathbf{b}), \mathbf{y}
+\Big)
+=
+l
+\Big(
+\mathbf{f}(\mathbf{W}\mathbf{x}+\mathbf{b}), \mathbf{y}
+\Big),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{f}:\mathbb{R}^3 \to (0,1)^3\)</span> is <span class="math notranslate nohighlight">\(f(\mathbf{z})=\text{softmax}(\mathbf{z})\)</span> that takes any arbitrary vector in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> and maps it to a probability vector in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>. Notice that, a softmax function cannot provide zero or one in its components.</p>
+<p><strong>Optimization</strong></p>
+<p>Once we have a scalar-valued function we can minimize it using optimization algorithms like gradient descent. Algebraically speaking, we can minimize the following:</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{\mathbf{W}\in \mathbb{R}^{3\times 4}, \mathbf{b} \in \mathbb{R}^3}
+\text{CE}
+\Big(
+\text{softmax}(
+\mathbf{W}\mathbf{x}+\mathbf{b}), \mathbf{y}
+\Big),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is a given data vector in <span class="math notranslate nohighlight">\(\mathbb{R}^{4}\)</span> with its corresponding label</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{y} \in \Big\{
+\begin{bmatrix}
+1
+\\
+0
+\\
+0
+\end{bmatrix}
+,
+\begin{bmatrix}
+0
+\\
+1
+\\
+0
+\end{bmatrix}
+,
+\begin{bmatrix}
+0
+\\
+0
+\\
+1
+\end{bmatrix}
+\Big\}.
+\end{split}\]</div>
+<p>For sure minimizing the above is theoretically possible, but in practice we are given an <span class="math notranslate nohighlight">\(N\)</span> set of pairs of data <span class="math notranslate nohighlight">\(\{(\mathbf{x}^{(1)}, \mathbf{y}^{(1)}), \dots, (\mathbf{x}^{(N)}, \mathbf{y}^{(N)})\}\)</span>. By looking at the above we can see that the loss now can be defined as the average loss over all data points
+as follows</p>
+<div class="math notranslate nohighlight">
+\[
+\ell(X, Y, \mathbf{W}, \mathbf{b})
+=
+\frac{1}{N}
+\sum_{i=1}^N
+\text{CE}
+\Big(
+\text{softmax}(
+\mathbf{W}\mathbf{x^{(i)}}+\mathbf{b}), \mathbf{y}^{(i)}
+\Big),
+\]</div>
+<p>where</p>
+<p><span class="math notranslate nohighlight">\(
+X=\{\mathbf{x}^{(1)}, \dots, \mathbf{x}^{(N)}\}
+\)</span>
+and
+<span class="math notranslate nohighlight">\(
+Y=\{\mathbf{y}^{(1)}, \dots, \mathbf{y}^{(N)}\}.
+\)</span></p>
+<p>For notational simplicity, <span class="math notranslate nohighlight">\(\ell(X, Y, \mathbf{W}, \mathbf{b})\)</span> is usually written as
+<span class="math notranslate nohighlight">\(\ell(\boldsymbol{\theta})\)</span> where <span class="math notranslate nohighlight">\(\boldsymbol{\theta}=\{\mathbf{W}, \mathbf{b}\}\)</span>. Also, the loss associated to a data point <span class="math notranslate nohighlight">\(l
+(
+\mathbf{y}^{(i)}, \hat{\mathbf{y}}^{(i)}
+)\)</span>
+is written as <span class="math notranslate nohighlight">\(l_i
+(
+\boldsymbol{\theta}
+)\)</span>.
+Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\ell(\boldsymbol{\theta})
+=
+\frac{1}{N}
+\sum_{i=1}^N
+l_i
+(
+\boldsymbol{\theta}
+)
+=
+\frac{1}{N}
+\sum_{i=1}^N
+\text{CE}
+\Big(
+\text{softmax}(
+\mathbf{W}\mathbf{x^{(i)}}+\mathbf{b}), \mathbf{y}^{(i)}
+\Big)
+\]</div>
+<p>Finally we can minimize the loss function as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{\boldsymbol{\theta}}
+\ell(\boldsymbol{\theta})
+=
+\min_{\mathbf{W}\in \mathbb{R}^{3\times 4}, \mathbf{b} \in \mathbb{R}^3}
+\frac{1}{N}
+\sum_{i=1}^N
+\text{CE}
+\Big(
+\text{softmax}(
+\mathbf{W}\mathbf{x^{(i)}}+\mathbf{b}), \mathbf{y}^{(i)}
+\Big).
+\]</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="One-layer neural networks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Saeed Damadi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
