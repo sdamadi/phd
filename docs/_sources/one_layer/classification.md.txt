@@ -2,7 +2,7 @@
 A one-layer neural network architecture provides a lot of insights about fundamental understanding concepts like parameters, training, the role of loss function, backpropagation, and so on. Consider a one-layer neural network that has 4 inputs and 3 outputs as follows.
 
 <figure style="text-align: center;">
-  <img src="../../_static/images/iris/one_layer/sing_layer_arch_wx.svg" alt="A one-layer neural network architecture" width="40%">
+  <img src="/phd/_static/images/iris/one_layer/sing_layer_arch_wx.svg" alt="A one-layer neural network architecture" width="40%">
   <figcaption>A one-layer neural network architecture.</figcaption>
 </figure>
 
@@ -55,7 +55,7 @@ $$
 The vector $\hat{\mathbf{y}}$ is now the output of the single layer neural network as the picture shows. 
 
 <figure style="text-align: center;">
-  <img src="../../_static/images/iris/one_layer/sing_layer_model_wx.svg" alt="A one-layer neural network model" width="40%">
+  <img src="/phd/_static/images/iris/one_layer/sing_layer_model_wx.svg" alt="A one-layer neural network model" width="40%">
   <figcaption>A one-layer neural network model.</figcaption>
 </figure>
 
