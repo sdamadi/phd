@@ -8,7 +8,7 @@ Consider a one-layer neural network that has 4 inputs and 3 outputs as follows.
 A one-layer neural network architecture 
 
 <figure style="text-align: center;">
-  <img src="/phd/_static/images/one_layer/sing_layer_arch_wx.svg" alt="A one-layer neural network architecture" width="40%">
+  <img src="/phd/_static/images/one_layer/single_layer_arch_wx.svg" alt="A one-layer neural network architecture" width="40%">
   <figcaption>A one-layer neural network architecture.</figcaption>
 </figure>
 
@@ -61,7 +61,7 @@ $$
 The vector $\hat{\mathbf{y}}$ is now the output of the single layer neural network as the picture shows. 
 
 <figure style="text-align: center;">
-  <img src="/phd/_static/images/one_layer/sing_layer_model_wx.svg" alt="A one-layer neural network model" width="40%">
+  <img src="/phd/_static/images/one_layer/single_layer_model_wx.svg" alt="A one-layer neural network model" width="40%">
   <figcaption>A one-layer neural network model.</figcaption>
 </figure>
 
