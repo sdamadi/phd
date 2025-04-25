@@ -213,6 +213,40 @@ y_{N}
 \end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\text{MSE}\)</span> is the mean squared error loss funciton.</p>
 <p>Sounds very complicated, but if you notice, you can see that the following neural network does the same thing where <span class="math notranslate nohighlight">\(\mathbf{w}=[\theta_1, \dots, \theta_n]\)</span> and <span class="math notranslate nohighlight">\(b=\theta_0\)</span>. This single-layer neural network with no activation function (or using the identity function) and MSE loss is mathematically equivalent to linear regression.</p>
+<figure style="text-align: center;">
+  <img src="../../_static/images/one_layer/linear_regression.svg" alt="Linear regression as a one-layer neural network" width="40%">
+  <figcaption>Linear regression as a one-layer neural network.</figcaption>
+</figure>
+<p>The image shows a single-layer neural network with:</p>
+<ul class="simple">
+<li><p>Input nodes (<span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>, …, <span class="math notranslate nohighlight">\(x_n\)</span>) in purple</p></li>
+<li><p>Weights connecting the inputs to the output (<span class="math notranslate nohighlight">\(w_1\)</span>, <span class="math notranslate nohighlight">\(w_2\)</span>, …, <span class="math notranslate nohighlight">\(w_n\)</span>)</p></li>
+<li><p>A bias term <span class="math notranslate nohighlight">\(b\)</span></p></li>
+<li><p>A summation node (the green + symbol)</p></li>
+<li><p>An output <span class="math notranslate nohighlight">\(\hat{y}\)</span></p></li>
+</ul>
+<p>In this formulation, the neural network directly computes:</p>
+<div class="math notranslate nohighlight">
+\[\hat{y} = w_1x_1 + w_2x_2 + ... + w_nx_n + b\]</div>
+<p>This is identical to the linear regression formula:</p>
+<div class="math notranslate nohighlight">
+\[y = \theta_0 + \theta_1x_1 + \theta_2x_2 + ... + \theta_nx_n\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p>The bias <span class="math notranslate nohighlight">\(b\)</span> in the neural network corresponds to <span class="math notranslate nohighlight">\(\theta_0\)</span> in linear regression</p></li>
+<li><p>The weights <span class="math notranslate nohighlight">\(w_1\)</span>, <span class="math notranslate nohighlight">\(w_2\)</span>, …, <span class="math notranslate nohighlight">\(w_n\)</span> correspond to <span class="math notranslate nohighlight">\(\theta_1\)</span>, <span class="math notranslate nohighlight">\(\theta_2\)</span>, …, <span class="math notranslate nohighlight">\(\theta_n\)</span></p></li>
+</ul>
+<p>When using MSE (Mean Squared Error) as the loss function, we’re essentially minimizing:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^{N}(\hat{y}_i - y_i)^2 = \sum_{i=1}^{N}(\mathbf{w}\cdot\mathbf{x}^{(i)} + b - y^{(i)})^2\]</div>
+<p>Which is exactly the same optimization objective as in standard linear regression.</p>
+<p>The key insight is that while neural networks typically use non-linear activation functions to model complex relationships, when you use:</p>
+<ol class="arabic simple">
+<li><p>A single layer</p></li>
+<li><p>No activation function (or the identity function)</p></li>
+<li><p>MSE as the loss function</p></li>
+</ol>
+<p>You end up with precisely the mathematical formulation of linear regression. This demonstrates that linear regression is essentially the simplest possible neural network.</p>
 </section>
 
 

@@ -96,3 +96,42 @@ $$
 where $\text{MSE}$ is the mean squared error loss funciton.
 
 Sounds very complicated, but if you notice, you can see that the following neural network does the same thing where $\mathbf{w}=[\theta_1, \dots, \theta_n]$ and $b=\theta_0$. This single-layer neural network with no activation function (or using the identity function) and MSE loss is mathematically equivalent to linear regression.
+
+<figure style="text-align: center;">
+  <img src="../../_static/images/one_layer/linear_regression.svg" alt="Linear regression as a one-layer neural network" width="40%">
+  <figcaption>Linear regression as a one-layer neural network.</figcaption>
+</figure>
+
+
+The image shows a single-layer neural network with:
+
+* Input nodes ($x_1$, $x_2$, ..., $x_n$) in purple
+* Weights connecting the inputs to the output ($w_1$, $w_2$, ..., $w_n$)
+* A bias term $b$
+* A summation node (the green + symbol)
+* An output $\hat{y}$
+
+In this formulation, the neural network directly computes:
+
+$$\hat{y} = w_1x_1 + w_2x_2 + ... + w_nx_n + b$$
+
+This is identical to the linear regression formula:
+
+$$y = \theta_0 + \theta_1x_1 + \theta_2x_2 + ... + \theta_nx_n$$
+
+Where:
+* The bias $b$ in the neural network corresponds to $\theta_0$ in linear regression
+* The weights $w_1$, $w_2$, ..., $w_n$ correspond to $\theta_1$, $\theta_2$, ..., $\theta_n$
+
+When using MSE (Mean Squared Error) as the loss function, we're essentially minimizing:
+
+$$\sum_{i=1}^{N}(\hat{y}_i - y_i)^2 = \sum_{i=1}^{N}(\mathbf{w}\cdot\mathbf{x}^{(i)} + b - y^{(i)})^2$$
+
+Which is exactly the same optimization objective as in standard linear regression.
+
+The key insight is that while neural networks typically use non-linear activation functions to model complex relationships, when you use:
+1. A single layer
+2. No activation function (or the identity function)
+3. MSE as the loss function
+
+You end up with precisely the mathematical formulation of linear regression. This demonstrates that linear regression is essentially the simplest possible neural network.
