@@ -98,7 +98,7 @@ where $\text{MSE}$ is the mean squared error loss funciton.
 Sounds very complicated, but if you notice, you can see that the following neural network does the same thing where $\mathbf{w}=[\theta_1, \dots, \theta_n]$ and $b=\theta_0$. This single-layer neural network with no activation function (or using the identity function) and MSE loss is mathematically equivalent to linear regression.
 
 <figure style="text-align: center;">
-  <img src="../../_static/images/one_layer/linear_regression.svg" alt="Linear regression as a one-layer neural network" width="40%">
+  <img src="/phd/_static/images/one_layer/linear_regression.svg" alt="Linear regression as a one-layer neural network" width="40%">
   <figcaption>Linear regression as a one-layer neural network.</figcaption>
 </figure>
 
