@@ -7,4 +7,4 @@ One-layer neural networks
    :maxdepth: 2
 
    classification
-   
+   linear_regression

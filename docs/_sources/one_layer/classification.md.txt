@@ -1,5 +1,11 @@
-# One-layer neural network
-A one-layer neural network architecture provides a lot of insights about fundamental understanding concepts like parameters, training, the role of loss function, backpropagation, and so on. Consider a one-layer neural network that has 4 inputs and 3 outputs as follows.
+# One-Layer NN (Classification)
+
+A one-layer neural network (also known as a perceptron) is a fundamental architecture that provides a lot of insights about understanding basic concepts 
+like parameters, training, the role of loss function, backpropagation, and so on. 
+
+Consider a one-layer neural network that has 4 inputs and 3 outputs as follows.
+
+A one-layer neural network architecture 
 
 <figure style="text-align: center;">
   <img src="/phd/_static/images/one_layer/sing_layer_arch_wx.svg" alt="A one-layer neural network architecture" width="40%">
