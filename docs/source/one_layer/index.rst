@@ -8,3 +8,4 @@ One-layer neural networks
 
    classification
    linear_regression
+   logistic_regression

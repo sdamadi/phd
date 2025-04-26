@@ -2,10 +2,10 @@
 
 The goal of the following document is to show linear regression is just a neural network with a single layer with no activation function (or identity) where the final loss function is the mean squared error.
 
-To see the above, let's recall what is the goal of linear regression. It tries to model the output $y$ as the linear combinations of inputs plus a constant term, i.e.,
+To see the above, let's recall what is the goal of linear regression. It tries to find a linear model whose output $\hat{y}$ is the linear combinations of inputs plus a constant term, i.e.,
 
 $$
-y=\theta_0 + \theta_1 x_1 + \dots + \theta_n x_n
+\hat{y}=\theta_0 + \theta_1 x_1 + \dots + \theta_n x_n
 $$
 
 When we collect data, we have $N$ such $(x_1^{(i)}, x_2^{(i)},\dots, x_n^{(i)})$
@@ -22,26 +22,26 @@ Suppose $N=5$, $n=3$, then we have the following table.
 | $x_1^{(4)}$ | $x_2^{(4)}$ | $x_3^{(4)}$ | $y^{(4)}$ |
 | $x_1^{(5)}$ | $x_2^{(5)}$ | $x_3^{(5)}$ | $y^{(5)}$ |
 
-This table represents our dataset with 5 samples ($N=5$) and 3 features ($n=3$), where each row contains the input features and corresponding output value.
+This table represents our dataset with 5 samples ($N=5$) and 3 features ($n=3$), where each row contains the input features and corresponding label value.
 
-Then we can put $x$ values and create the data matrix $\mathbf{X}$ and take the column of $y$ and create the output vector $\mathbf{y}$. Thus, one needs to minimize the following to find the best $\boldsymbol{\theta}$:
+Then we can stack $x$ values together and create the data matrix $\mathbf{X}$ and take the column of $y$ and create the label vector $\mathbf{y}$. Thus, one needs to minimize the following to find the best $\boldsymbol{\theta}$:
 
-
-$$
-\|\tilde{\mathbf{X}}\boldsymbol{\theta} - \mathbf{y}\|^2,
-$$
-
-where 
 
 $$
-\tilde{\mathbf{X}} = 
+\|\mathbf{\hat{y}} - \mathbf{y}\|^2 = \|\tilde{\mathbf{X}}\boldsymbol{\theta} - \mathbf{y}\|^2,
+$$
+
+where $\mathbf{\hat{y}}$ is the model output vector, 
+
+$$
+\tilde{\mathbf{X}}= 
 \begin{bmatrix}
 \mathbf{1} &
 \mathbf{X}
 \end{bmatrix},
 $$
 
-with $\mathbf{1}$ is a column of ones,
+with $\mathbf{1}$ as a column of ones,
 and 
 $\boldsymbol{\theta}=[\theta_0, \theta_1, \dots, \theta_n]^{\top}$.
 

@@ -103,10 +103,10 @@
   <section class="tex2jax_ignore mathjax_ignore" id="one-layer-nn-linear-regression">
 <h1>One-Layer NN (Linear Regression)<a class="headerlink" href="#one-layer-nn-linear-regression" title="Permalink to this heading"></a></h1>
 <p>The goal of the following document is to show linear regression is just a neural network with a single layer with no activation function (or identity) where the final loss function is the mean squared error.</p>
-<p>To see the above, let’s recall what is the goal of linear regression. It tries to model the output <span class="math notranslate nohighlight">\(y\)</span> as the linear combinations of inputs plus a constant term, i.e.,</p>
+<p>To see the above, let’s recall what is the goal of linear regression. It tries to find a linear model whose output <span class="math notranslate nohighlight">\(\hat{y}\)</span> is the linear combinations of inputs plus a constant term, i.e.,</p>
 <div class="math notranslate nohighlight">
 \[
-y=\theta_0 + \theta_1 x_1 + \dots + \theta_n x_n
+\hat{y}=\theta_0 + \theta_1 x_1 + \dots + \theta_n x_n
 \]</div>
 <p>When we collect data, we have <span class="math notranslate nohighlight">\(N\)</span> such <span class="math notranslate nohighlight">\((x_1^{(i)}, x_2^{(i)},\dots, x_n^{(i)})\)</span>
 for each <span class="math notranslate nohighlight">\(y^{(i)}\)</span> where <span class="math notranslate nohighlight">\(i=1, \dots, N\)</span>.</p>
@@ -147,22 +147,22 @@ for each <span class="math notranslate nohighlight">\(y^{(i)}\)</span> where <sp
 </tr>
 </tbody>
 </table>
-<p>This table represents our dataset with 5 samples (<span class="math notranslate nohighlight">\(N=5\)</span>) and 3 features (<span class="math notranslate nohighlight">\(n=3\)</span>), where each row contains the input features and corresponding output value.</p>
-<p>Then we can put <span class="math notranslate nohighlight">\(x\)</span> values and create the data matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> and take the column of <span class="math notranslate nohighlight">\(y\)</span> and create the output vector <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. Thus, one needs to minimize the following to find the best <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>:</p>
+<p>This table represents our dataset with 5 samples (<span class="math notranslate nohighlight">\(N=5\)</span>) and 3 features (<span class="math notranslate nohighlight">\(n=3\)</span>), where each row contains the input features and corresponding label value.</p>
+<p>Then we can stack <span class="math notranslate nohighlight">\(x\)</span> values together and create the data matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> and take the column of <span class="math notranslate nohighlight">\(y\)</span> and create the label vector <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. Thus, one needs to minimize the following to find the best <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-\|\tilde{\mathbf{X}}\boldsymbol{\theta} - \mathbf{y}\|^2,
+\|\mathbf{\hat{y}} - \mathbf{y}\|^2 = \|\tilde{\mathbf{X}}\boldsymbol{\theta} - \mathbf{y}\|^2,
 \]</div>
-<p>where</p>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{\hat{y}}\)</span> is the model output vector,</p>
 <div class="math notranslate nohighlight">
 \[
-\tilde{\mathbf{X}} = 
+\tilde{\mathbf{X}}= 
 \begin{bmatrix}
 \mathbf{1} &amp;
 \mathbf{X}
 \end{bmatrix},
 \]</div>
-<p>with <span class="math notranslate nohighlight">\(\mathbf{1}\)</span> is a column of ones,
+<p>with <span class="math notranslate nohighlight">\(\mathbf{1}\)</span> as a column of ones,
 and
 <span class="math notranslate nohighlight">\(\boldsymbol{\theta}=[\theta_0, \theta_1, \dots, \theta_n]^{\top}\)</span>.</p>
 <p>Notice that we can write the above as follows:</p>

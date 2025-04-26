@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>One-Layer NN (Logistic Regression) &mdash; Saeed Damadi PhD  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="One-Layer NN (Linear Regression)" href="linear_regression.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Saeed Damadi PhD
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../iris/index.html">Iris</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../iris/model_uncertainty.html">Model Uncertainty</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rl/index.html">Reinforcement Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rl/log_derivative_trick.html">Log-derivative formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/trajectory_probability.html">Trajectory Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_gradient_proof.html">Policy Gradient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_grad_alg.html">Policy Gradient Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms/index.html">Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/iht.html">Iterative Hard Thresholding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sparsity/index.html">Sparsity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sparsity/unstructured_sparsity.html">Unstructured Sparsity</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../statistical_models/index.html">Statistical Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../statistical_models/arima.html">ARIMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statistical_models/garch.html">GARCH</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">One-layer neural networks</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="classification.html">One-Layer NN (Classification)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_regression.html">One-Layer NN (Linear Regression)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">One-Layer NN (Logistic Regression)</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Saeed Damadi PhD</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">One-layer neural networks</a></li>
+      <li class="breadcrumb-item active">One-Layer NN (Logistic Regression)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/one_layer/logistic_regression.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="one-layer-nn-logistic-regression">
+<h1>One-Layer NN (Logistic Regression)<a class="headerlink" href="#one-layer-nn-logistic-regression" title="Permalink to this heading"></a></h1>
+<p>The goal of this document is to show that <strong>logistic regression</strong> is exactly a neural network with a single layer, a sigmoid activation, and the binary cross-entropy loss.</p>
+<p><strong>Model definition</strong></p>
+<p>Logistic regression models the probability that <span class="math notranslate nohighlight">\(y=1\)</span> given inputs <span class="math notranslate nohighlight">\(\mathbf{x}=(x_1,\dots,x_n)\)</span> by
+<span class="math notranslate nohighlight">\(
+\hat p(\mathbf{x}) \;=\;\sigma\!\bigl(\theta_0 + \theta_1 x_1 + \dots + \theta_n x_n\bigr),
+\qquad
+\sigma(z)=\frac1{1+e^{-z}}.
+\)</span></p>
+<p>Equivalently, if we write
+<span class="math notranslate nohighlight">\(\tilde{\mathbf x}=[1,\,x_1,\dots,x_n]\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol\theta=[\theta_0,\theta_1,\dots,\theta_n]^\top\)</span>, then
+<span class="math notranslate nohighlight">\(
+\hat p^{(i)}
+=\sigma\bigl(\tilde{\mathbf x}^{(i)\top}\boldsymbol\theta\bigr).
+\)</span></p>
+<p><strong>Data</strong></p>
+<p>We observe <span class="math notranslate nohighlight">\(N\)</span> samples <span class="math notranslate nohighlight">\(\{(\mathbf x^{(i)},y^{(i)})\}_{i=1}^N\)</span>, where each <span class="math notranslate nohighlight">\(y^{(i)}\in\{0,1\}\)</span>.<br />
+For example, if <span class="math notranslate nohighlight">\(N=5\)</span> and <span class="math notranslate nohighlight">\(n=3\)</span>:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(x_1\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(x_2\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(x_3\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(y\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(x_1^{(1)}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(x_2^{(1)}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(x_3^{(1)}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(y^{(1)}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(x_1^{(2)}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(x_2^{(2)}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(x_3^{(2)}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(y^{(2)}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(x_1^{(3)}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(x_2^{(3)}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(x_3^{(3)}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(y^{(3)}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(x_1^{(4)}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(x_2^{(4)}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(x_3^{(4)}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(y^{(4)}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(x_1^{(5)}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(x_2^{(5)}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(x_3^{(5)}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(y^{(5)}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>As before, stack these into
+<span class="math notranslate nohighlight">\(\tilde{\mathbf X} = [\mathbf1\;\;\mathbf X]\in\mathbb R^{N\times(n+1)}\)</span>
+and <span class="math notranslate nohighlight">\(\mathbf y=(y^{(1)},\dots,y^{(N)})^\top\)</span>.</p>
+<p><strong>Maximum Likelihood Estimation</strong></p>
+<p>Logistic regression fits <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span> by maximizing the likelihood function. For binary classification with <span class="math notranslate nohighlight">\(y^{(i)}\in\{0,1\}\)</span>, we can write the likelihood as:</p>
+<p><span class="math notranslate nohighlight">\(
+\begin{aligned}
+\mathcal{L}(\boldsymbol\theta) &amp;= \prod_{i=1}^N (\hat p^{(i)})^{y^{(i)}} (1-\hat p^{(i)})^{1-y^{(i)}}
+\end{aligned}
+\)</span></p>
+<p>This expresses the probability of observing our dataset under the model. Taking the logarithm (which preserves the maximum):</p>
+<p><span class="math notranslate nohighlight">\(
+\begin{aligned}
+\log\mathcal{L}(\boldsymbol\theta) &amp;= \sum_{i=1}^N \Bigl[y^{(i)}\log\hat p^{(i)} + (1-y^{(i)})\log(1-\hat p^{(i)})\Bigr]
+\end{aligned}
+\)</span></p>
+<p>Substituting <span class="math notranslate nohighlight">\(\hat p^{(i)} = \sigma(\tilde{\mathbf{x}}^{(i)\top}\boldsymbol\theta)\)</span> and simplifying:</p>
+<p><span class="math notranslate nohighlight">\(
+\begin{aligned}
+\log\mathcal{L}(\boldsymbol\theta) &amp;= \sum_{i=1}^N \Bigl[y^{(i)}\log\sigma(\tilde{\mathbf{x}}^{(i)\top}\boldsymbol\theta) + (1-y^{(i)})\log(1-\sigma(\tilde{\mathbf{x}}^{(i)\top}\boldsymbol\theta))\Bigr] \\
+&amp;= \sum_{i=1}^N \Bigl[y^{(i)}\tilde{\mathbf{x}}^{(i)\top}\boldsymbol\theta - \log(1+e^{\tilde{\mathbf{x}}^{(i)\top}\boldsymbol\theta})\Bigr]
+\end{aligned}
+\)</span></p>
+<p>In practice, we often minimize the negative log-likelihood (divided by N to get the average):</p>
+<p><span class="math notranslate nohighlight">\(
+\begin{aligned}
+-\frac{1}{N}\log\mathcal{L}(\boldsymbol\theta) &amp;= \frac{1}{N}\sum_{i=1}^N \Bigl[\log(1+e^{\tilde{\mathbf{x}}^{(i)\top}\boldsymbol\theta}) - y^{(i)}\tilde{\mathbf{x}}^{(i)\top}\boldsymbol\theta\Bigr].
+\end{aligned}
+\)</span></p>
+<p>Therefore,</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol\theta^* \in \text{Argmax}_{\boldsymbol\theta} \frac{1}{N}\sum_{i=1}^N \Bigl[\log(1+e^{\tilde{\mathbf{x}}^{(i)\top}\boldsymbol\theta}) - y^{(i)}\tilde{\mathbf{x}}^{(i)\top}\boldsymbol\theta\Bigr].
+\]</div>
+<p><strong>Neural-network view</strong></p>
+<p>Notice that we can represent logistic regression as a single-layer neural network with a sigmoid activation function. This is exactly analogous to how we represented linear regression as a single-layer neural network with no activation function (or identity).</p>
+<figure style="text-align:center;">
+  <img src=src="/phd/_static/images/one_layer/logistic_regression.svg" alt="Logistic regression as a one-layer neural network" width="40%">
+  <figcaption>Logistic regression as a one-layer neural network.</figcaption>
+</figure>
+<p>In this network:</p>
+<ul class="simple">
+<li><p><strong>Input nodes</strong>: <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_n\)</span> (shown in purple)</p></li>
+<li><p><strong>Weights</strong>: <span class="math notranslate nohighlight">\(w_j = \theta_j\)</span> for <span class="math notranslate nohighlight">\(j=1,\ldots,n\)</span></p></li>
+<li><p><strong>Bias</strong>: <span class="math notranslate nohighlight">\(b = \theta_0\)</span></p></li>
+<li><p><strong>Summation node</strong>: Computes <span class="math notranslate nohighlight">\(z = \sum_{j=1}^n w_j x_j + b\)</span> (shown as the green “+” symbol)</p></li>
+<li><p><strong>Activation function</strong>: Sigmoid <span class="math notranslate nohighlight">\(\sigma(z) = \frac{1}{1+e^{-z}}\)</span></p></li>
+<li><p><strong>Output</strong>: <span class="math notranslate nohighlight">\(\hat{y} = \hat{p} = \sigma(z)\)</span></p></li>
+</ul>
+<p>The forward propagation through this network is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+z^{(i)} &amp;= \mathbf{w}^\top\mathbf{x}^{(i)} + b \\
+&amp;= w_1 x_1^{(i)} + w_2 x_2^{(i)} + \ldots + w_n x_n^{(i)} + b \\
+&amp;= \theta_1 x_1^{(i)} + \theta_2 x_2^{(i)} + \ldots + \theta_n x_n^{(i)} + \theta_0 \\
+&amp;= \tilde{\mathbf{x}}^{(i)\top}\boldsymbol{\theta}
+\end{aligned}
+\end{split}\]</div>
+<p>And the final output is:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{p}^{(i)} = \sigma(z^{(i)}) = \sigma(\tilde{\mathbf{x}}^{(i)\top}\boldsymbol{\theta})
+\]</div>
+<p>This is identical to the logistic regression formula we defined at the beginning.</p>
+<p>When training this neural network, we use the binary cross-entropy loss:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{BCE}(\hat{p}^{(i)}, y^{(i)}) = -[y^{(i)}\log\hat{p}^{(i)} + (1-y^{(i)})\log(1-\hat{p}^{(i)})]
+\]</div>
+<p>Let’s show that minimizing this BCE loss in the neural network is equivalent to maximizing the likelihood in logistic regression:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+\text{BCE}(\hat{p}^{(i)}, y^{(i)}) &amp;= -[y^{(i)}\log\sigma(z^{(i)}) + (1-y^{(i)})\log(1-\sigma(z^{(i)}))]
+\end{aligned}
+\]</div>
+<p>This is exactly the negative log-likelihood for a single observation. Summing over all observations and dividing by N:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\frac{1}{N}\sum_{i=1}^{N}\text{BCE}(\hat{p}^{(i)}, y^{(i)}) &amp;= -\frac{1}{N}\sum_{i=1}^{N}[y^{(i)}\log\sigma(z^{(i)}) + (1-y^{(i)})\log(1-\sigma(z^{(i)}))] \\
+&amp;= -\frac{1}{N}\log\mathcal{L}(\boldsymbol{\theta})
+\end{aligned}
+\end{split}\]</div>
+<p>So minimizing the average binary cross-entropy loss in the neural network is mathematically equivalent to maximizing the likelihood function in the statistical formulation of logistic regression.</p>
+<p>Using the substitution <span class="math notranslate nohighlight">\(z^{(i)} = \tilde{\mathbf{x}}^{(i)\top}\boldsymbol{\theta}\)</span> and simplifying:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+\frac{1}{N}\sum_{i=1}^{N}\text{BCE}(\hat{p}^{(i)}, y^{(i)}) &amp;= \frac{1}{N}\sum_{i=1}^{N}[\log(1+e^{\tilde{\mathbf{x}}^{(i)\top}\boldsymbol{\theta}}) - y^{(i)}\tilde{\mathbf{x}}^{(i)\top}\boldsymbol{\theta}].
+\end{aligned}
+\]</div>
+<p><strong>Key takeaway</strong></p>
+<p><strong>Logistic regression</strong> = <strong>one-layer neural network</strong></p>
+<ul class="simple">
+<li><p><strong>Activation:</strong> sigmoid</p></li>
+<li><p><strong>Loss/Objective:</strong> binary cross-entropy (equivalent to negative log-likelihood)</p></li>
+</ul>
+<p>This shows that, just as linear regression is a single-layer neural network with identity activation and MSE loss, logistic regression is nothing more than the simplest possible neural network for binary classification with a sigmoid activation and binary cross-entropy loss.</p>
+<p>The main differences between linear regression and logistic regression as neural networks are:</p>
+<ol class="arabic simple">
+<li><p>Linear regression uses no activation function (or identity), while logistic regression uses the sigmoid function</p></li>
+<li><p>Linear regression uses MSE loss, while logistic regression uses binary cross-entropy (which corresponds to maximum likelihood estimation)</p></li>
+<li><p>Linear regression predicts continuous values, while logistic regression predicts probabilities for binary classification</p></li>
+</ol>
+<p>This connection illustrates how neural networks naturally extend traditional statistical methods, with the optimization objective (maximizing likelihood in statistics or minimizing loss in neural networks) being mathematically equivalent formulations of the same goal.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="linear_regression.html" class="btn btn-neutral float-left" title="One-Layer NN (Linear Regression)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Saeed Damadi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
