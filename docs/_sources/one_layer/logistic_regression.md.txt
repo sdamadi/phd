@@ -82,7 +82,7 @@ $$
 Notice that we can represent logistic regression as a single-layer neural network with a sigmoid activation function. This is exactly analogous to how we represented linear regression as a single-layer neural network with no activation function (or identity).
 
 <figure style="text-align:center;">
-  <img src=src="/phd/_static/images/one_layer/logistic_regression.svg" alt="Logistic regression as a one-layer neural network" width="40%">
+  <img src="/phd/_static/images/one_layer/logistic_regression.svg" alt="Logistic regression as a one-layer neural network" width="40%">
   <figcaption>Logistic regression as a one-layer neural network.</figcaption>
 </figure>
 
