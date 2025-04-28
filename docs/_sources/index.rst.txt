@@ -31,3 +31,4 @@ Feel free to reach out to me on `LinkedIn <https://www.linkedin.com/in/saeed-dam
    sparsity/index
    statistical_models/index
    one_layer/index
+   time_series/index
