@@ -19,11 +19,6 @@ The figure below shows window-wise normalization or rolling standardization. Thi
   <figcaption>Rolling Standardization for the closing price.</figcaption>
 </figure>
 
-<figure style="text-align: center;">
-  <img src="/phd/_static/images/one_layer/single_layer_arch_wx.svg" alt="A one-layer neural network architecture" width="40%">
-  <figcaption>A one-layer neural network architecture.</figcaption>
-</figure>
-
 
 **Rationale for Rolling Normalization**
 
