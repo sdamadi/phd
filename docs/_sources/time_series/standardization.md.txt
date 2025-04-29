@@ -15,15 +15,9 @@ where $\mu^c_i$ and $\sigma^c_i$ are the mean and standard deviation of the $i$-
 The figure below shows window-wise normalization or rolling standardization. This process converts the close time series matrix $\mathbf{X}^c$ into a new matrix $\mathbf{Z}^c$ with the same structure.
 
 <figure style="text-align: center;">
-  <img src="/phd/_static/images/ts/standardization.svg" alt="Rolling Standardization for the closing price" width="80%">
+  <img src="/phd/_static/images/ts/standardization.svg" alt="Rolling Standardization" width="80%">
   <figcaption>Rolling Standardization for the closing price.</figcaption>
 </figure>
-
-<figure style="text-align: center;">
-  <img src="/phd/_static/images/one_layer/single_layer_arch_wx.svg" alt="A one-layer neural network architecture" width="40%">
-  <figcaption>A one-layer neural network architecture.</figcaption>
-</figure>
-
 
 **Rationale for Rolling Normalization**
 

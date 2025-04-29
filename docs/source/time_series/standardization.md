@@ -19,7 +19,6 @@ The figure below shows window-wise normalization or rolling standardization. Thi
   <figcaption>Rolling Standardization for the closing price.</figcaption>
 </figure>
 
-
 **Rationale for Rolling Normalization**
 
 Window-wise normalization has a theoretically appealing property: when each time window is normalized by its local statistics, the resulting row values approximately follow a normal distribution. This occurs because normalizing by the mean and standard deviation of each window aligns the data with a normal distribution.
