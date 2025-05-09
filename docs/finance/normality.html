@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Osborne’s work (Normality) &mdash; Saeed Damadi  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+      <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+const load = async () => {
+    await mermaid.run();
+    const all_mermaids = document.querySelectorAll(".mermaid");
+    const mermaids_to_add_zoom = 1 === -1 ? all_mermaids.length : 1;
+    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+    if(mermaids_to_add_zoom > 0) {
+        var svgs = d3.selectAll(".mermaid[data-zoom-id=id-146a4f5b-bfde-4b48-ae2c-2324ddc3cb76] svg");
+        if(all_mermaids.length !== mermaids_processed.length) {
+            // try again in a sec, wait for mermaids to load
+            setTimeout(load, 200);
+            return;
+        } else if(svgs.size() !== mermaids_to_add_zoom) {
+            // try again in a sec, wait for mermaids to load
+            setTimeout(load, 200);
+            return;
+        } else {
+            svgs.each(function() {
+                var svg = d3.select(this);
+                svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+                var inner = svg.select("g");
+                var zoom = d3.zoom().on("zoom", function(event) {
+                    inner.attr("transform", event.transform);
+                });
+                svg.call(zoom);
+            });
+        }
+    }
+};
+
+window.addEventListener("load", load);
+</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Log-returns" href="log_returns.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Saeed Damadi
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../iris/index.html">Iris</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../iris/model_uncertainty.html">Model Uncertainty</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rl/index.html">Reinforcement Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rl/log_derivative_trick.html">Log-derivative formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/trajectory_probability.html">Trajectory Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_gradient_proof.html">Policy Gradient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_grad_alg.html">Policy Gradient Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms/index.html">Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/iht.html">Iterative Hard Thresholding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sparsity/index.html">Sparsity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sparsity/unstructured_sparsity.html">Unstructured Sparsity</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../statistical_models/index.html">Statistical Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../statistical_models/arima.html">ARIMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statistical_models/garch.html">GARCH</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../one_layer/index.html">One-layer neural networks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../one_layer/classification.html">One-Layer NN (Classification)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../one_layer/linear_regression.html">One-Layer NN (Linear Regression)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../one_layer/logistic_regression.html">One-Layer NN (Logistic Regression)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../time_series/index.html">Time series</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../time_series/standardization.html">Rolling Standardization</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Finance</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="log_returns.html">Log-returns</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Osborne’s work (Normality)</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Saeed Damadi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Finance</a></li>
+      <li class="breadcrumb-item active">Osborne’s work (Normality)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/finance/normality.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="osborne-s-work-normality">
+<span id="osborne"></span><h1>Osborne’s work (Normality)<a class="headerlink" href="#osborne-s-work-normality" title="Permalink to this heading"></a></h1>
+<p><strong>Explaining Osborne’s Normality in Quantitative Finance</strong></p>
+<p><strong>Empirical Foundation</strong>
+Maurice Osborne’s 1959 <a class="reference external" href="https://www.jstor.org/stable/167153?seq=1">research</a> added empirical evidence to the use of normality in quantitative finance. Before that, models like Bachelier’s and Samuelson’s common models weren’t grounded in real-world data. Osborne analyzed years of NYSE stock data, focusing on daily log-returns, and found these data closely followed a Gaussian distribution. His research showed that normally distributed log-returns were not just useful math but a realistic way to model price changes—this foundation influenced major financial theories like Markowitz portfolio theory and the Black-Scholes model.</p>
+<p><strong>From Pooled Normality to Individual Returns</strong></p>
+<p>Osborne’s work gave quantitative finance the empirical backup needed to assume normality in log-returns. He demonstrated that pooled lagged returns fit a normal distribution, though this doesn’t imply individual returns do. To bridge this gap, we make two key assumptions:</p>
+<ol class="arabic">
+<li><p><strong>Stationarity</strong>: The distribution of returns doesn’t change over time, meaning:</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}[r_t]=\mu \quad \text{and} \quad \text{Cov}(r_t,r_{t+h})=C(h)\]</div>
+<p>This allows us to pool returns across time, treating each <span class="math notranslate nohighlight">\(r_t\)</span> as a draw from the same distribution.</p>
+</li>
+<li><p><strong>Exchangeability</strong>: A sequence <span class="math notranslate nohighlight">\(\{r_1,...,r_n\}\)</span> is exchangeable if its joint distribution remains unchanged under any reordering. This property:</p>
+<ul class="simple">
+<li><p>Ensures all returns share an identical marginal distribution</p></li>
+<li><p>Justifies pooling across different assets</p></li>
+<li><p>By de Finetti’s theorem, makes the pooled histogram a consistent estimator of the common marginal distribution</p></li>
+</ul>
+</li>
+</ol>
+<p>Together, these assumptions create a logical pathway:</p>
+<ol class="arabic simple">
+<li><p><strong>Osborne’s empirical finding</strong>: The pooled distribution of log-returns follows a Gaussian pattern</p></li>
+<li><p><strong>Stationarity</strong>: Justifies treating returns across different time periods as samples from the same distribution</p></li>
+<li><p><strong>Exchangeability</strong>: Justifies treating returns across different assets as samples from the same distribution</p></li>
+<li><p><strong>Parametric modeling</strong>: We choose to model this common distribution as Normal</p></li>
+</ol>
+<p>Therefore, we can conclude:</p>
+<div class="math notranslate nohighlight">
+\[r_t = \ln{\frac{p_t}{p_{t-1}}} \sim N(\mu, \sigma^2)\]</div>
+<p>This unified framework explains why, despite Osborne only showing normality in pooled returns, we can reasonably model each individual return as normally distributed.</p>
+<p>The following flow chart shows the why Osborne’s work can lead to normal distribution for each asset.</p>
+<pre align="center" data-zoom-id="id-146a4f5b-bfde-4b48-ae2c-2324ddc3cb76" class="mermaid align-center">
+        graph TD;
+  A[&quot;Osborne’s Study&quot;] --&gt;|Shows Gaussian fit| B[&quot;Pooled Distribution&quot;];
+  B --&gt;|Shows Gaussian fit| C1[&quot;Assumption 1: Stationarity&quot;];
+  B --&gt;|Shows Gaussian fit| C2[&quot;Assumption 2: Exchangeability&quot;];
+  C1 --&gt;|Same distribution over time| D[&quot;Common Marginal Distribution&quot;];
+  C2 --&gt;|Same distribution across assets| D;
+  D --&gt;|Parametric modeling choice| E[&quot;Each Return Follows Normal&quot;];
+
+  %% node styles
+  classDef blue   fill:#d4f1f9,stroke:#0077be;
+  classDef orange fill:#ffe6cc,stroke:#d79b00;
+  classDef green  fill:#d5e8d4,stroke:#82b366;
+
+  class A,B blue;
+  class C1,C2 orange;
+  class D,E green;
+
+    </pre></section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="log_returns.html" class="btn btn-neutral float-left" title="Log-returns" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Saeed Damadi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -16,6 +16,14 @@
       <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
       <script src="_static/doctools.js?v=888ff710"></script>
       <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+      <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
     <script src="_static/js/theme.js"></script>
     <script src="_static/searchtools.js"></script>
     <script src="_static/language_data.js"></script>
@@ -75,6 +83,12 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="time_series/index.html">Time series</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="time_series/standardization.html">Rolling Standardization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="finance/index.html">Finance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="finance/log_returns.html">Log-returns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finance/normality.html">Osborne’s work (Normality)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finance/returns_additivity.html">Returns Additivity</a></li>
 </ul>
 </li>
 </ul>

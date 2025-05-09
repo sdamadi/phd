@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Iterative Hard Thresholding &mdash; Saeed Damadi  documentation</title>
+  <title>Return additivity &mdash; Saeed Damadi  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -20,9 +20,7 @@
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Sparsity" href="../sparsity/index.html" />
-    <link rel="prev" title="Algorithms" href="index.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,7 +42,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../iris/index.html">Iris</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../iris/model_uncertainty.html">Model Uncertainty</a></li>
 </ul>
@@ -56,8 +54,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../rl/policy_grad_alg.html">Policy Gradient Algorithm</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Algorithms</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Iterative Hard Thresholding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms/index.html">Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/iht.html">Iterative Hard Thresholding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../sparsity/index.html">Sparsity</a><ul>
@@ -79,9 +77,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../time_series/standardization.html">Rolling Standardization</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../finance/index.html">Finance</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../finance/log_returns.html">Log-returns</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../finance/normality.html">Osborne’s work (Normality)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Finance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="log_returns.html">Log-returns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normality.html">Osborne’s work (Normality)</a></li>
 </ul>
 </li>
 </ul>
@@ -100,10 +98,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">Algorithms</a></li>
-      <li class="breadcrumb-item active">Iterative Hard Thresholding</li>
+      <li class="breadcrumb-item active">Return additivity</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/algorithms/iht.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/finance/return_additivity.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -111,35 +108,87 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="iterative-hard-thresholding">
-<h1>Iterative Hard Thresholding<a class="headerlink" href="#iterative-hard-thresholding" title="Permalink to this heading"></a></h1>
-<p>The Iterative Hard Thresholding (IHT) algorithm is the sparse analogue of the gradient descent algorithm. After performing the gradient update, it projects a dense vector into a sparse vector. Mathematically speaking, it projects a given vector into a lower dimensional subspace by retaining only the most significant components.</p>
-<p>Unlike standard gradient descent which updates all parameters, IHT enforces sparsity by keeping only the s largest (in magnitude) components after each gradient step, setting all other components to zero. This makes IHT particularly useful for problems where the solution is known to be sparse, such as compressed sensing, sparse regression, and sparse signal recovery.</p>
-<div class="math notranslate nohighlight">
-\[
-\textbf{Algorithm: Iterative Hard Thresholding (IHT)}
-\]</div>
-<p><span class="math notranslate nohighlight">\(\textbf{Input:}\)</span> Initial parameter vector <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^0 \in \mathbb{R}^n\)</span> satisfying <span class="math notranslate nohighlight">\(\|\boldsymbol{\theta}^0\|_0 \leq s\)</span>, sparsity level <span class="math notranslate nohighlight">\(s\)</span>, and stepsize <span class="math notranslate nohighlight">\(\gamma &gt; 0\)</span>.</p>
-<p><span class="math notranslate nohighlight">\(\text{For } k = 0, 1, 2, \dots \text{ do:}\)</span></p>
-<div class="math notranslate nohighlight">
-\[
-\mathbf{v}^k = \boldsymbol{\theta}^k - \gamma \nabla f(\boldsymbol{\theta}^k)
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\boldsymbol{\theta}^{k+1} \in H_s(\mathbf{v}^k),
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(H_s\)</span> is the hard-thresholding operator which is a set-valued operator meaning its ouput is not unique. It sorts the input vector in absolute value and keeps only the <span class="math notranslate nohighlight">\(s\)</span> largest entries, setting all others to zero.
-For example, <span class="math notranslate nohighlight">\(H_2([1, -3, 1]^\top)=\{[1, -3, 0]^\top, [0, -3, 1]^\top\}\)</span>.</p>
+  <p>(addadditivity)</p>
+<section class="tex2jax_ignore mathjax_ignore" id="return-additivity">
+<h1>Return additivity<a class="headerlink" href="#return-additivity" title="Permalink to this heading"></a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="financial-returns">
+<h1>Financial Returns<a class="headerlink" href="#financial-returns" title="Permalink to this heading"></a></h1>
+<p>Definitions:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p_t\)</span> = price at time <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{r}_t = \frac{p_t}{p_{t-1}} - 1\)</span> = actual (arithmetic) return at time <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(r_t = \ln\frac{p_t}{p_{t-1}}\)</span> = log return at time <span class="math notranslate nohighlight">\(t\)</span></p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Period</p></th>
+<th class="head text-center"><p>Price <span class="math notranslate nohighlight">\(p_t\)</span></p></th>
+<th class="head text-center"><p>Actual return <span class="math notranslate nohighlight">\(\hat{r}_t\)</span></p></th>
+<th class="head text-center"><p>Log return <span class="math notranslate nohighlight">\(r_t\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>100</p></td>
+<td class="text-center"><p>-</p></td>
+<td class="text-center"><p>-</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>102</p></td>
+<td class="text-center"><p>0.0200</p></td>
+<td class="text-center"><p>0.01980</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>104.04</p></td>
+<td class="text-center"><p>0.0200</p></td>
+<td class="text-center"><p>0.01980</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>106.12</p></td>
+<td class="text-center"><p>0.0200</p></td>
+<td class="text-center"><p>0.01980</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p>108.24</p></td>
+<td class="text-center"><p>0.0200</p></td>
+<td class="text-center"><p>0.01980</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p>110.41</p></td>
+<td class="text-center"><p>0.0200</p></td>
+<td class="text-center"><p>0.01980</p></td>
+</tr>
+</tbody>
+</table>
+<section id="analysis-of-returns">
+<h2>Analysis of Returns<a class="headerlink" href="#analysis-of-returns" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Sum of actual returns:</strong>
+<span class="math notranslate nohighlight">\(\sum_{t=1}^5 \hat{r}_t = 5 \times 0.0200 = 0.1000 \;(=10.00\%)\)</span></p></li>
+<li><p><strong>Compounded actual returns:</strong>
+<span class="math notranslate nohighlight">\(\prod_{t=1}^5 (1+\hat{r}_t) - 1 = 1.02^5 - 1 = 0.1041 \;(=10.41\%)\)</span></p></li>
+<li><p><strong>Sum of log returns:</strong>
+<span class="math notranslate nohighlight">\(\sum_{t=1}^5 r_t = 5 \times 0.01980 = 0.0990\)</span></p></li>
+<li><p><strong>Converted to actual return:</strong>
+<span class="math notranslate nohighlight">\(e^{\sum_{t=1}^5 r_t} - 1 = e^{0.0990} - 1 = 0.1041 \;(=10.41\%)\)</span></p></li>
+</ul>
+</section>
+<section id="key-insights">
+<h2>Key Insights:<a class="headerlink" href="#key-insights" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>The sum of log returns equals the log of the total price ratio: <span class="math notranslate nohighlight">\(\sum_{t=1}^T r_t = \ln\frac{p_T}{p_0}\)</span></p></li>
+<li><p>Exponentiating the sum of log returns gives the same result as compounding the actual returns.</p></li>
+<li><p>Simply summing actual returns (10.00%) underestimates the true compounded return (10.41%).</p></li>
+<li><p>The difference between summed and compounded returns increases with more periods or higher volatility.</p></li>
+</ul>
+</section>
 </section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Algorithms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../sparsity/index.html" class="btn btn-neutral float-right" title="Sparsity" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

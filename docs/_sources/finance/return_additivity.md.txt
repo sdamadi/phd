@@ -1,0 +1,42 @@
+(addadditivity)
+# Return additivity
+
+# Financial Returns 
+
+Definitions:
+- $p_t$ = price at time $t$
+- $\hat{r}_t = \frac{p_t}{p_{t-1}} - 1$ = actual (arithmetic) return at time $t$
+- $r_t = \ln\frac{p_t}{p_{t-1}}$ = log return at time $t$
+
+| Period | Price $p_t$ | Actual return $\hat{r}_t$ | Log return $r_t$ |
+| :----: | :---------: | :----------------------: | :--------------: |
+|    0   |     100     |            -             |         -        |
+|    1   |     102     |          0.0200          |      0.01980     |
+|    2   |    104.04   |          0.0200          |      0.01980     |
+|    3   |    106.12   |          0.0200          |      0.01980     |
+|    4   |    108.24   |          0.0200          |      0.01980     |
+|    5   |    110.41   |          0.0200          |      0.01980     |
+
+## Analysis of Returns
+
+* **Sum of actual returns:**
+  $\sum_{t=1}^5 \hat{r}_t = 5 \times 0.0200 = 0.1000 \;(=10.00\%)$
+
+* **Compounded actual returns:**
+  $\prod_{t=1}^5 (1+\hat{r}_t) - 1 = 1.02^5 - 1 = 0.1041 \;(=10.41\%)$
+
+* **Sum of log returns:**
+  $\sum_{t=1}^5 r_t = 5 \times 0.01980 = 0.0990$
+  
+* **Converted to actual return:**
+  $e^{\sum_{t=1}^5 r_t} - 1 = e^{0.0990} - 1 = 0.1041 \;(=10.41\%)$
+
+## Key Insights:
+
+* The sum of log returns equals the log of the total price ratio: $\sum_{t=1}^T r_t = \ln\frac{p_T}{p_0}$
+
+* Exponentiating the sum of log returns gives the same result as compounding the actual returns.
+
+* Simply summing actual returns (10.00%) underestimates the true compounded return (10.41%).
+
+* The difference between summed and compounded returns increases with more periods or higher volatility.

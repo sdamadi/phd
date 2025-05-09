@@ -24,7 +24,8 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',  # For viewing source code
     'myst_parser',
-    'sphinx.ext.mathjax'  # or 'sphinx.ext.imgmath' for PNG rendering
+    'sphinx.ext.mathjax',  # or 'sphinx.ext.imgmath' for PNG rendering
+    'sphinxcontrib.mermaid'
 ]
 
 

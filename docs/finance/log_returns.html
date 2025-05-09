@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Iterative Hard Thresholding &mdash; Saeed Damadi  documentation</title>
+  <title>Log-returns &mdash; Saeed Damadi  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Sparsity" href="../sparsity/index.html" />
-    <link rel="prev" title="Algorithms" href="index.html" /> 
+    <link rel="next" title="Osborne’s work (Normality)" href="normality.html" />
+    <link rel="prev" title="Finance" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -56,8 +56,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../rl/policy_grad_alg.html">Policy Gradient Algorithm</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Algorithms</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Iterative Hard Thresholding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms/index.html">Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/iht.html">Iterative Hard Thresholding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../sparsity/index.html">Sparsity</a><ul>
@@ -79,9 +79,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../time_series/standardization.html">Rolling Standardization</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../finance/index.html">Finance</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../finance/log_returns.html">Log-returns</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../finance/normality.html">Osborne’s work (Normality)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Finance</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Log-returns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normality.html">Osborne’s work (Normality)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="returns_additivity.html">Returns Additivity</a></li>
 </ul>
 </li>
 </ul>
@@ -100,10 +101,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">Algorithms</a></li>
-      <li class="breadcrumb-item active">Iterative Hard Thresholding</li>
+          <li class="breadcrumb-item"><a href="index.html">Finance</a></li>
+      <li class="breadcrumb-item active">Log-returns</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/algorithms/iht.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/finance/log_returns.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -111,34 +112,49 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="iterative-hard-thresholding">
-<h1>Iterative Hard Thresholding<a class="headerlink" href="#iterative-hard-thresholding" title="Permalink to this heading"></a></h1>
-<p>The Iterative Hard Thresholding (IHT) algorithm is the sparse analogue of the gradient descent algorithm. After performing the gradient update, it projects a dense vector into a sparse vector. Mathematically speaking, it projects a given vector into a lower dimensional subspace by retaining only the most significant components.</p>
-<p>Unlike standard gradient descent which updates all parameters, IHT enforces sparsity by keeping only the s largest (in magnitude) components after each gradient step, setting all other components to zero. This makes IHT particularly useful for problems where the solution is known to be sparse, such as compressed sensing, sparse regression, and sparse signal recovery.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="log-returns">
+<h1>Log-returns<a class="headerlink" href="#log-returns" title="Permalink to this heading"></a></h1>
+<p>In practice, most portfolio‑optimization and tracking models (mean–variance, index‑tracking, risk‑parity, etc.) are estimated on <strong>logarithmic returns</strong> rather than simple (arithmetic) returns.</p>
+<p>This is well-justified by <a class="reference internal" href="normality.html#osborne"><span class="std std-ref">Osborne’s seminal work</span></a> on Brownian motion in stock markets (1959), which demonstrated that logarithmic returns tend to follow a normal distribution. This property not only provides mathematical convenience but also aligns with the empirical observation of how price changes propagate through financial markets.</p>
+<p>Here are some convenient statistical and mathematical properties:</p>
+<p><strong>Time‑additivity (continuous compounding)</strong></p>
+<p>If you define the one‐period log‐return as
+<span class="math notranslate nohighlight">\(r_t = \ln\frac{p_t}{p_{t-1}},\)</span>
+then over multiple periods the total log‐return is simply the sum
+<span class="math notranslate nohighlight">\(\ln\frac{p_T}{p_0} = \sum_{t=1}^T r_t.\)</span>
+By contrast, arithmetic returns must be compounded multiplicatively, which complicates multi‐period aggregation. Check <a class="reference internal" href="returns_additivity.html#additivity"><span class="std std-ref">the example</span></a> on the additivity of returns.</p>
+<p><strong>Approximate Normality</strong></p>
+<p>Empirically, log‐returns tend to be (more) bell‐shaped and closer to Gaussian—especially at daily or lower frequencies—making the classic Markowitz mean–variance framework (which assumes normality) more sound. If returns are normally distributed, then mean and variance capture everything about the distribution.</p>
+<p><strong>Stationarity of Volatility</strong></p>
+<p>Log‐returns often exhibit more stable variances over time, which leads to more reliable estimates of the covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span>. Stable covariances are crucial when you solve</p>
+<ul class="simple">
+<li><p>Mean-Variance Optimization</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\min_{\mathbf{w}\geq 0, \mathbf{w}^{\top}\mathbf{w}=1}\;\;\lambda \mathbf{w}^{\top}\Sigma\,\mathbf{w} - \boldsymbol{\mu}^\top \mathbf{w}\]</div>
+<ul class="simple">
+<li><p>Tracking Error Minimization</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\min_{\mathbf{w}\geq 0, \mathbf{w}^{\top}\mathbf{w}=1}\;\;\|\mathbf{R}\mathbf{w} - \mathbf{r}\|^2.\]</div>
+<p><strong>Symmetry and Unboundedness</strong></p>
+<p>With simple returns, losses are bounded at <span class="math notranslate nohighlight">\(-100\%\)</span> but gains are unbounded, skewing distributional estimates. Log‐returns are symmetric in that they map <span class="math notranslate nohighlight">\((0,\infty)\)</span> price ratios onto <span class="math notranslate nohighlight">\((-\infty,\infty)\)</span>, which simplifies many risk‐metric calculations. Because <span class="math notranslate nohighlight">\(\hat r_t = \tfrac{p_t}{p_{t-1}} - 1\)</span> is limited to <span class="math notranslate nohighlight">\([-1,\infty)\)</span>—compressing all negative losses into <span class="math notranslate nohighlight">\([-1,0)\)</span> (at most -%100 loss) while permitting unbounded gains—the distribution of <span class="math notranslate nohighlight">\(\hat r_t\)</span> is right‑skewed; by contrast, log-returns</p>
 <div class="math notranslate nohighlight">
 \[
-\textbf{Algorithm: Iterative Hard Thresholding (IHT)}
+r_t = \ln\frac{p_t}{p_{t-1}}
 \]</div>
-<p><span class="math notranslate nohighlight">\(\textbf{Input:}\)</span> Initial parameter vector <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^0 \in \mathbb{R}^n\)</span> satisfying <span class="math notranslate nohighlight">\(\|\boldsymbol{\theta}^0\|_0 \leq s\)</span>, sparsity level <span class="math notranslate nohighlight">\(s\)</span>, and stepsize <span class="math notranslate nohighlight">\(\gamma &gt; 0\)</span>.</p>
-<p><span class="math notranslate nohighlight">\(\text{For } k = 0, 1, 2, \dots \text{ do:}\)</span></p>
-<div class="math notranslate nohighlight">
-\[
-\mathbf{v}^k = \boldsymbol{\theta}^k - \gamma \nabla f(\boldsymbol{\theta}^k)
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\boldsymbol{\theta}^{k+1} \in H_s(\mathbf{v}^k),
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(H_s\)</span> is the hard-thresholding operator which is a set-valued operator meaning its ouput is not unique. It sorts the input vector in absolute value and keeps only the <span class="math notranslate nohighlight">\(s\)</span> largest entries, setting all others to zero.
-For example, <span class="math notranslate nohighlight">\(H_2([1, -3, 1]^\top)=\{[1, -3, 0]^\top, [0, -3, 1]^\top\}\)</span>.</p>
+<p>provide a one‑to‑one mapping of price ratios <span class="math notranslate nohighlight">\((0,\infty)\)</span> onto <span class="math notranslate nohighlight">\((-\infty,\infty)\)</span>, yielding a symmetric support.</p>
+<p><strong>Analytical Convenience</strong></p>
+<p>Many closed‐form results (e.g. formulas for risk contributions in a risk‐parity portfolio) become algebraically cleaner when expressed in terms of log‐returns.</p>
+<p>In short, using log‐returns makes your inputs more additive, more Gaussian, and more stable—properties that directly improve the robustness and tractability of mean–variance, index‐tracking, and risk‐parity optimizations.</p>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Algorithms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../sparsity/index.html" class="btn btn-neutral float-right" title="Sparsity" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Finance" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="normality.html" class="btn btn-neutral float-right" title="Osborne’s work (Normality)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

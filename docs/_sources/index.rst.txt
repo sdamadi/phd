@@ -32,3 +32,4 @@ Feel free to reach out to me on `LinkedIn <https://www.linkedin.com/in/saeed-dam
    statistical_models/index
    one_layer/index
    time_series/index
+   finance/index

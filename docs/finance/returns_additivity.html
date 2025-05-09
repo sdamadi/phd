@@ -1,0 +1,271 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Returns Additivity &mdash; Saeed Damadi  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script>window.MathJax = {"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Osborne’s work (Normality)" href="normality.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Saeed Damadi
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../iris/index.html">Iris</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../iris/model_uncertainty.html">Model Uncertainty</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rl/index.html">Reinforcement Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rl/log_derivative_trick.html">Log-derivative formula</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/trajectory_probability.html">Trajectory Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_gradient_proof.html">Policy Gradient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rl/policy_grad_alg.html">Policy Gradient Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms/index.html">Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/iht.html">Iterative Hard Thresholding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sparsity/index.html">Sparsity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sparsity/unstructured_sparsity.html">Unstructured Sparsity</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../statistical_models/index.html">Statistical Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../statistical_models/arima.html">ARIMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statistical_models/garch.html">GARCH</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../one_layer/index.html">One-layer neural networks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../one_layer/classification.html">One-Layer NN (Classification)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../one_layer/linear_regression.html">One-Layer NN (Linear Regression)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../one_layer/logistic_regression.html">One-Layer NN (Logistic Regression)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../time_series/index.html">Time series</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../time_series/standardization.html">Rolling Standardization</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Finance</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="log_returns.html">Log-returns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normality.html">Osborne’s work (Normality)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Returns Additivity</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Saeed Damadi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Finance</a></li>
+      <li class="breadcrumb-item active">Returns Additivity</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/finance/returns_additivity.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="returns-additivity">
+<span id="additivity"></span><h1>Returns Additivity<a class="headerlink" href="#returns-additivity" title="Permalink to this heading"></a></h1>
+<p>Let</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p_t\)</span> = price at time <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat r_t = \frac{p_t}{p_{t-1}} - 1\)</span> be the actual (arithmetic) return at time <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(r_t = \ln\frac{p_t}{p_{t-1}}\)</span> be the log return at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+</ul>
+<p>Consider the following table of TQQQ prices for ten trading days and their corresponding returns:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Period</p></th>
+<th class="head text-left"><p>Date</p></th>
+<th class="head text-right"><p><span class="math notranslate nohighlight">\(p_t\)</span></p></th>
+<th class="head text-center"><p>Actual return <span class="math notranslate nohighlight">\(\hat r_t\)</span></p></th>
+<th class="head text-center"><p>Log return <span class="math notranslate nohighlight">\(r_t\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-left"><p>2025‑04‑25</p></td>
+<td class="text-right"><p>53.86</p></td>
+<td class="text-center"><p>–</p></td>
+<td class="text-center"><p>–</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-left"><p>2025‑04‑28</p></td>
+<td class="text-right"><p>53.82</p></td>
+<td class="text-center"><p>−0.000743</p></td>
+<td class="text-center"><p>−0.000743</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>2</p></td>
+<td class="text-left"><p>2025‑04‑29</p></td>
+<td class="text-right"><p>54.87</p></td>
+<td class="text-center"><p>0.019509</p></td>
+<td class="text-center"><p>0.019322</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>3</p></td>
+<td class="text-left"><p>2025‑04‑30</p></td>
+<td class="text-right"><p>54.88</p></td>
+<td class="text-center"><p>0.000182</p></td>
+<td class="text-center"><p>0.000182</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>4</p></td>
+<td class="text-left"><p>2025‑05‑01</p></td>
+<td class="text-right"><p>56.77</p></td>
+<td class="text-center"><p>0.034439</p></td>
+<td class="text-center"><p>0.033859</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>5</p></td>
+<td class="text-left"><p>2025‑05‑02</p></td>
+<td class="text-right"><p>59.43</p></td>
+<td class="text-center"><p>0.046856</p></td>
+<td class="text-center"><p>0.045791</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>6</p></td>
+<td class="text-left"><p>2025‑05‑05</p></td>
+<td class="text-right"><p>58.40</p></td>
+<td class="text-center"><p>−0.017331</p></td>
+<td class="text-center"><p>−0.017483</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>7</p></td>
+<td class="text-left"><p>2025‑05‑06</p></td>
+<td class="text-right"><p>56.74</p></td>
+<td class="text-center"><p>−0.028425</p></td>
+<td class="text-center"><p>−0.028836</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>8</p></td>
+<td class="text-left"><p>2025‑05‑07</p></td>
+<td class="text-right"><p>57.40</p></td>
+<td class="text-center"><p>0.011632</p></td>
+<td class="text-center"><p>0.011565</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>9</p></td>
+<td class="text-left"><p>2025‑05‑08</p></td>
+<td class="text-right"><p>59.11</p></td>
+<td class="text-center"><p>0.029791</p></td>
+<td class="text-center"><p>0.029356</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Analysis of Returns</strong></p>
+<ul>
+<li><p><strong>Sum of actual returns:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{t=1}^{9} \hat r_t
+    = -0.000743 + 0.019509 + \cdots + 0.029791
+    = 0.09591\;(=9.59\%).
+  \]</div>
+</li>
+<li><p><strong>Compounded actual return:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+    \prod_{t=1}^{9}(1+\hat r_t) - 1
+    = 1.02\ldots - 1
+    = 0.09747\;(=9.75\%).
+  \]</div>
+</li>
+<li><p><strong>Sum of log returns:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{t=1}^{9} r_t
+    = -0.000743 + 0.019322 + \cdots + 0.029356
+    = 0.09301\;(=9.30\%).
+  \]</div>
+</li>
+<li><p><strong>Converted to actual return:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+    e^{\sum_{t=1}^{9} r_t} - 1
+    = e^{0.09301} - 1
+    = 0.09747\;(=9.75\%).
+  \]</div>
+</li>
+</ul>
+<p><strong>Key Insights</strong></p>
+<ul class="simple">
+<li><p>The sum of log returns equals the log of the total price ratio:
+<span class="math notranslate nohighlight">\(\displaystyle \sum_{t=1}^T r_t = \ln\frac{p_T}{p_0}.\)</span></p></li>
+<li><p>Exponentiating the sum of log returns reproduces the compounded return.</p></li>
+<li><p>Simply summing arithmetic returns (9.59%) underestimates the true compounded return (9.75%).</p></li>
+<li><p>The return obtained via exponentiating the sum of log returns (9.75%) and the compounded actual return (9.75%) are effectively identical—showing how closely these methods agree.</p></li>
+<li><p>The gap between summed and compounded returns widens with more periods or greater volatility.</p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="normality.html" class="btn btn-neutral float-left" title="Osborne’s work (Normality)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Saeed Damadi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
