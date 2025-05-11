@@ -9,3 +9,5 @@ Finance
    log_returns
    normality
    returns_additivity
+   expected_returns
+   covariance

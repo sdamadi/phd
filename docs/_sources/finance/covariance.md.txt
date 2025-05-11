@@ -1,0 +1,97 @@
+(covariance)= 
+# Covariance Matrix
+
+In portfolio theory, the **sample covariance matrix** $\hat\Sigma$ is a critical input for both the mean–variance optimization (the Markowitz portfolio) and risk‑parity approaches.
+
+When we speak of “covariance” in practice, we always mean the sample version—since the population covariance matrix is purely hypothetical and unobservable. A **population covariance matrix** is defined as
+
+$$
+\Sigma = \mathbb{E}\bigl[(\mathbf r_t - \boldsymbol\mu)(\mathbf r_t - \boldsymbol\mu)^\top\bigr]
+$$
+
+where:
+
+* $\mathbf r_t \in \mathbb R^n$ is the random return vector at time $t$.
+* $\boldsymbol\mu = \mathbb{E}[\mathbf r_t]$ is the true mean return vector.
+
+We begin by computing the **sample mean return vector** of $n$ assets,
+$\hat{\boldsymbol\mu}\in\mathbb R^n$,
+also known as the **expected return vector**, as the column‑wise average of each asset’s [log‑returns](log_returns.md#log‑returns) over the $T-1$ observations. As detailed in [log‑returns](log_returns.md#log‑returns), “return” refers to log‑returns; see [Osborne’s work](normality.md#osborne) for why log‑returns are preferred.
+
+With $\mathbf r_t\in\mathbb R^n$ denoting the vector of log‑returns at time $t$, the sample covariance matrix is then
+
+$$
+\hat\Sigma
+= \frac{1}{T-1}
+\sum_{t=1}^{T-1}
+\bigl(\mathbf r_t - \hat{\boldsymbol\mu}\bigr)
+\bigl(\mathbf r_t - \hat{\boldsymbol\mu}\bigr)^\top,
+$$
+
+where the factor $1/(T-1)$ ensures $\hat\Sigma$ is an unbiased estimator of the true covariance.
+
+---
+
+**Computation**
+
+To calculate the sample covariance matrix we build the [return matrix](expected_returns.md#expected-returns) by stacking log‑returns into an $(T-1)\times n$ matrix
+
+$$
+R = \begin{bmatrix} \mathbf r^{(1)} & \mathbf r^{(2)} & \cdots & \mathbf r^{(n)} \end{bmatrix},
+$$
+
+where each column
+
+$$
+\mathbf r^{(i)} = \bigl(r_1^{(i)}, r_2^{(i)}, \dots, r_{T-1}^{(i)}\bigr)^\top
+$$
+
+contains the log‑returns of asset $i$:
+$$
+r_t^{(i)} = \ln\bigl(\tfrac{p_{t+1}^{(i)}}{p_t^{(i)}}\bigr).
+$$
+
+Then we center the return matrix by subtracting each column’s mean from its entries, i.e.\ 
+$$
+\tilde R = R - \mathbf1\,\hat{\boldsymbol\mu}^\top,
+\quad
+\hat{\boldsymbol\mu} = \frac{1}{T-1}\,R^\top\mathbf1.
+$$
+
+Finally, the sample covariance matrix is found as follows:
+
+$$
+\hat\Sigma = \frac{1}{T-1}\,\tilde R^\top\,\tilde R
+= \frac{1}{T-1} \sum_{t=1}^{T-1} (\mathbf r_t - \hat\mu)(\mathbf r_t - \hat\mu)^\top.
+$$
+
+**Note:** Because $\hat{\boldsymbol\mu}$ itself is a function of log‑returns, the sample covariance ultimately builds on log‑returns. Ensuring log‑returns are well‑justified (e.g., by the normality assumption in [Osborne's work](normality.md#osborne)) is therefore crucial, as it underpins every step of this construction.
+
+---
+
+**Numerical Example: Sample Covariance Matrix**
+
+Using our nine days of log‑returns for six assets (AAPL, AMZN, GOOG, MSFT, TQQQ, TSLA) from [the numerical example](expected_returns.md#expected-returns), we obtain:
+
+|          | AAPL      | AMZN      | GOOG      | MSFT     | TQQQ      | TSLA     |
+| -------- | --------- | --------- | --------- | -------- | --------- | -------- |
+| **AAPL** | 0.000299  | 0.000097  | -0.000012 | 0.000027 | -0.000035 | 0.000058 |
+| **AMZN** | 0.000097  | 0.000285  | -0.000078 | 0.000254 | 0.000244  | 0.000202 |
+| **GOOG** | -0.000012 | -0.000078 | 0.000851  | 0.000265 | 0.000189  | 0.000099 |
+| **MSFT** | 0.000027  | 0.000254  | 0.000265  | 0.000587 | 0.000374  | 0.000011 |
+| **TQQQ** | -0.000035 | 0.000244  | 0.000189  | 0.000374 | 0.000603  | 0.000328 |
+| **TSLA** | 0.000058  | 0.000202  | 0.000099  | 0.000011 | 0.000328  | 0.000752 |
+
+* **Diagonal** entries are each asset’s daily **variance** (volatility squared).
+* **Off‑diagonals** are daily **covariances**, measuring how pairs of assets co‑move:
+  * Positive values (e.g. AMZN‑MSFT) indicate returns tend to rise and fall together.
+  * Negative values (e.g. AAPL‑TQQQ) indicate opposite movements.
+
+---
+
+**Interpretation and Usage**
+
+* In **mean–variance optimization**, $\hat\Sigma$ enters as the risk (variance) term you minimize for a given expected return.
+* In **risk‑parity**, you assign weights so that each asset’s contribution to overall portfolio risk, computed via $\hat\Sigma$, is equal.
+
+Because both frameworks rely on the same $\hat\Sigma$ built from log‑returns and the sample mean, the [**justification of log‑returns’ properties**](normality.md#osborne) (e.g., approximate normality) propagates through to your portfolio construction rules.

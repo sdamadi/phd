@@ -30,7 +30,7 @@ const load = async () => {
     const mermaids_to_add_zoom = 1 === -1 ? all_mermaids.length : 1;
     const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
     if(mermaids_to_add_zoom > 0) {
-        var svgs = d3.selectAll(".mermaid[data-zoom-id=id-146a4f5b-bfde-4b48-ae2c-2324ddc3cb76] svg");
+        var svgs = d3.selectAll(".mermaid[data-zoom-id=id-57e0055f-3f08-4c58-9930-ba2d5e7cb15a] svg");
         if(all_mermaids.length !== mermaids_processed.length) {
             // try again in a sec, wait for mermaids to load
             setTimeout(load, 200);
@@ -58,6 +58,7 @@ window.addEventListener("load", load);
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Returns Additivity" href="returns_additivity.html" />
     <link rel="prev" title="Log-returns" href="log_returns.html" /> 
 </head>
 
@@ -118,6 +119,12 @@ window.addEventListener("load", load);
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Finance</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="log_returns.html">Log-returns</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Osborne’s work (Normality)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="returns_additivity.html">Returns Additivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expected_returns.html">Expected Returns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expected_returns.html#stock-prices-table">Stock Prices Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expected_returns.html#logreturns-table">Log‑Returns Table</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -180,14 +187,14 @@ Maurice Osborne’s 1959 <a class="reference external" href="https://www.jstor.o
 \[r_t = \ln{\frac{p_t}{p_{t-1}}} \sim N(\mu, \sigma^2)\]</div>
 <p>This unified framework explains why, despite Osborne only showing normality in pooled returns, we can reasonably model each individual return as normally distributed.</p>
 <p>The following flow chart shows the why Osborne’s work can lead to normal distribution for each asset.</p>
-<pre align="center" data-zoom-id="id-146a4f5b-bfde-4b48-ae2c-2324ddc3cb76" class="mermaid align-center">
+<pre align="center" data-zoom-id="id-57e0055f-3f08-4c58-9930-ba2d5e7cb15a" class="mermaid align-center">
         graph TD;
-  A[&quot;Osborne’s Study&quot;] --&gt;|Shows Gaussian fit| B[&quot;Pooled Distribution&quot;];
-  B --&gt;|Shows Gaussian fit| C1[&quot;Assumption 1: Stationarity&quot;];
-  B --&gt;|Shows Gaussian fit| C2[&quot;Assumption 2: Exchangeability&quot;];
-  C1 --&gt;|Same distribution over time| D[&quot;Common Marginal Distribution&quot;];
-  C2 --&gt;|Same distribution across assets| D;
-  D --&gt;|Parametric modeling choice| E[&quot;Each Return Follows Normal&quot;];
+  A[&quot;Osborne's work&quot;] --&gt; B[&quot;Pooled Distribution&quot;];
+  B --&gt; C1[&quot;Assumption 1: Stationarity&quot;];
+  B --&gt; C2[&quot;Assumption 2: Exchangeability&quot;];
+  C1 --&gt; D[&quot;Common Marginal Distribution&quot;];
+  C2 --&gt; D;
+  D --&gt; E[&quot;Each Return Follows Normal&quot;];
 
   %% node styles
   classDef blue   fill:#d4f1f9,stroke:#0077be;
@@ -198,6 +205,8 @@ Maurice Osborne’s 1959 <a class="reference external" href="https://www.jstor.o
   class C1,C2 orange;
   class D,E green;
 
+
+
     </pre></section>
 
 
@@ -205,6 +214,7 @@ Maurice Osborne’s 1959 <a class="reference external" href="https://www.jstor.o
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="log_returns.html" class="btn btn-neutral float-left" title="Log-returns" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="returns_additivity.html" class="btn btn-neutral float-right" title="Returns Additivity" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -42,12 +42,12 @@ The following flow chart shows the why Osborne's work can lead to normal distrib
 :zoom: 0.6
 
 graph TD;
-  A["Osborne’s Study"] -->|Shows Gaussian fit| B["Pooled Distribution"];
-  B -->|Shows Gaussian fit| C1["Assumption 1: Stationarity"];
-  B -->|Shows Gaussian fit| C2["Assumption 2: Exchangeability"];
-  C1 -->|Same distribution over time| D["Common Marginal Distribution"];
-  C2 -->|Same distribution across assets| D;
-  D -->|Parametric modeling choice| E["Each Return Follows Normal"];
+  A["Osborne's work"] --> B["Pooled Distribution"];
+  B --> C1["Assumption 1: Stationarity"];
+  B --> C2["Assumption 2: Exchangeability"];
+  C1 --> D["Common Marginal Distribution"];
+  C2 --> D;
+  D --> E["Each Return Follows Normal"];
 
   %% node styles
   classDef blue   fill:#d4f1f9,stroke:#0077be;
@@ -57,5 +57,7 @@ graph TD;
   class A,B blue;
   class C1,C2 orange;
   class D,E green;
+
+
 
 

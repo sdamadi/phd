@@ -1,3 +1,4 @@
+(log-returns)=
 # Log-returns
 
 In practice, most portfolio‑optimization and tracking models (mean–variance, index‑tracking, risk‑parity, etc.) are estimated on **logarithmic returns** rather than simple (arithmetic) returns. 
